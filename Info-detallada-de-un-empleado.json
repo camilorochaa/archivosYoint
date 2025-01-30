@@ -1,0 +1,746 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Yoint - Informacion detallada de un empleado",
+        "description": "Obt\u00e9n informaci\u00f3n de un empleado incluyendo datos personales",
+        "termsOfService": "https://yoint.co/terminos-y-condiciones/",
+        "contact": {
+            "email": "sales@yoint.co"
+        },
+        "version": "17"
+    },
+    "paths": {
+        "/users/employee": {
+            "post": {
+                "tags": [
+                    "Informaci\u00f3n Usuarios datos personales"
+                ],
+                "summary": "Informaci\u00f3n detallada de un empleado",
+                "description": "Obt\u00e9n la informaci\u00f3n detallada de un empleado incluyendo sus datos personales, historial de cr\u00e9dito y otros detalles relacionados. Este servicio requiere autorizaci\u00f3n previa del empleado.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "personType": {
+                                        "type": "integer",
+                                        "example": 1,
+                                        "description": "Tipo de persona (1 para natural)."
+                                    },
+                                    "documentNumber": {
+                                        "type": "string",
+                                        "example": "1787444",
+                                        "description": "N\u00famero de documento de la persona."
+                                    },
+                                    "lastName": {
+                                        "type": "string",
+                                        "example": "GARC\u00cdA",
+                                        "description": "Apellido de la persona."
+                                    },
+                                    "authorization": {
+                                        "type": "boolean",
+                                        "example": true,
+                                        "description": "Indicador de autorizaci\u00f3n para realizar la consulta."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "Informaci\u00f3n del empleado obtenida exitosamente.",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "object",
+                                        "properties": {
+                                            "ReportHDCplus": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "productResult": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "securityCode": {
+                                                                "type": "string",
+                                                                "example": "8XQCDD7",
+                                                                "description": "C\u00f3digo de seguridad de la consulta."
+                                                            },
+                                                            "consultDate": {
+                                                                "type": "string",
+                                                                "example": "2024-09-12T11:16:33",
+                                                                "description": "Fecha y hora de la consulta."
+                                                            },
+                                                            "responseCode": {
+                                                                "type": "integer",
+                                                                "example": 13,
+                                                                "description": "C\u00f3digo de respuesta de la consulta."
+                                                            },
+                                                            "responseDesc": {
+                                                                "type": "string",
+                                                                "example": "La consulta fue efectiva",
+                                                                "description": "Descripci\u00f3n de la respuesta."
+                                                            }
+                                                        }
+                                                    },
+                                                    "identifyingAttributes": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "personId": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "personIdNumber": {
+                                                                        "type": "integer",
+                                                                        "example": 80849735,
+                                                                        "description": "N\u00famero de identificaci\u00f3n de la persona."
+                                                                    },
+                                                                    "personIdType": {
+                                                                        "type": "integer",
+                                                                        "example": 1,
+                                                                        "description": "Tipo de identificaci\u00f3n de la persona."
+                                                                    }
+                                                                }
+                                                            },
+                                                            "personLastName": {
+                                                                "type": "string",
+                                                                "example": "RINCON",
+                                                                "description": "Apellido de la persona."
+                                                            }
+                                                        }
+                                                    },
+                                                    "basicInformation": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "personId": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "personIdNumber": {
+                                                                        "type": "integer",
+                                                                        "example": 80849735
+                                                                    },
+                                                                    "personIdType": {
+                                                                        "type": "integer",
+                                                                        "example": 1
+                                                                    }
+                                                                }
+                                                            },
+                                                            "gender": {
+                                                                "type": "integer",
+                                                                "example": 4,
+                                                                "description": "G\u00e9nero de la persona."
+                                                            },
+                                                            "genderDesc": {
+                                                                "type": "string",
+                                                                "example": "Hombre"
+                                                            },
+                                                            "names": {
+                                                                "type": "string",
+                                                                "example": "DIEGO ANDRES"
+                                                            },
+                                                            "firstLastName": {
+                                                                "type": "string",
+                                                                "example": "RINCON"
+                                                            },
+                                                            "secondLastName": {
+                                                                "type": "string",
+                                                                "example": "CANTOR"
+                                                            },
+                                                            "fullName": {
+                                                                "type": "string",
+                                                                "example": "RINCON CANTOR DIEGO ANDRES"
+                                                            },
+                                                            "citizenTaxRegistrationIndicator": {
+                                                                "type": "boolean",
+                                                                "example": true,
+                                                                "description": "Indicador de registro tributario ciudadano."
+                                                            },
+                                                            "officialSourceValidationStatus": {
+                                                                "type": "boolean",
+                                                                "example": true,
+                                                                "description": "Estado de validaci\u00f3n en fuente oficial."
+                                                            },
+                                                            "identification": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "statusId": {
+                                                                        "type": "string",
+                                                                        "example": "00"
+                                                                    },
+                                                                    "issueDate": {
+                                                                        "type": "string",
+                                                                        "example": "2002-06-06"
+                                                                    },
+                                                                    "issuingCityName": {
+                                                                        "type": "string",
+                                                                        "example": "BOGOTA D.C."
+                                                                    },
+                                                                    "issuingStateName": {
+                                                                        "type": "string",
+                                                                        "example": "CUNDINAMAR"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "age": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "min": {
+                                                                        "type": "integer",
+                                                                        "example": 36
+                                                                    },
+                                                                    "max": {
+                                                                        "type": "integer",
+                                                                        "example": 45
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "savings": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "account": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "primaryKey": {
+                                                                    "type": "string",
+                                                                    "example": "10008084973551000901119003161000000000"
+                                                                },
+                                                                "block": {
+                                                                    "type": "boolean",
+                                                                    "example": false
+                                                                },
+                                                                "filingCityName": {
+                                                                    "type": "string",
+                                                                    "example": "SANTAFE DE BOGOTA D."
+                                                                },
+                                                                "filingCityCode": {
+                                                                    "type": "string",
+                                                                    "example": "00000000"
+                                                                },
+                                                                "counterpartyIdNumber": {
+                                                                    "type": "string",
+                                                                    "example": "00890300279"
+                                                                },
+                                                                "businessLineName": {
+                                                                    "type": "string",
+                                                                    "example": "AHORROOCCIDENT"
+                                                                },
+                                                                "accountOpeningDate": {
+                                                                    "type": "string",
+                                                                    "example": "2021-04-23"
+                                                                },
+                                                                "accountNumber": {
+                                                                    "type": "string",
+                                                                    "example": "119003161"
+                                                                },
+                                                                "filingOffice": {
+                                                                    "type": "string",
+                                                                    "example": "EL CHICO"
+                                                                },
+                                                                "economicSector": {
+                                                                    "type": "integer",
+                                                                    "example": 1
+                                                                },
+                                                                "economicSectorName": {
+                                                                    "type": "string",
+                                                                    "example": "SECTOR FINANCIERO"
+                                                                },
+                                                                "stateOfAccountHolder": {
+                                                                    "type": "integer",
+                                                                    "example": 0
+                                                                },
+                                                                "stateOfAccountHolderDesc": {
+                                                                    "type": "string",
+                                                                    "example": "NORMAL"
+                                                                },
+                                                                "personId": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "personIdType": {
+                                                                            "type": "integer",
+                                                                            "example": 2
+                                                                        },
+                                                                        "personIdDesc": {
+                                                                            "type": "string",
+                                                                            "example": "N\u00daMERO DE IDENTIFICACI\u00d3N TRIBUTARIA"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "subAccountTypeName": {
+                                                                    "type": "string",
+                                                                    "example": "CUENTAS DE AHORRO Y BANCARIAS"
+                                                                },
+                                                                "accountType": {
+                                                                    "type": "integer",
+                                                                    "example": 51
+                                                                },
+                                                                "subAccountType": {
+                                                                    "type": "string",
+                                                                    "example": "00"
+                                                                },
+                                                                "subAccountTypeDesc": {
+                                                                    "type": "string",
+                                                                    "example": "AHO"
+                                                                }
+                                                            }
+                                                        },
+                                                        "features": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "accountCategory": {
+                                                                    "type": "integer",
+                                                                    "example": 0
+                                                                },
+                                                                "accountCategoryDesc": {
+                                                                    "type": "string",
+                                                                    "example": "NOR"
+                                                                }
+                                                            }
+                                                        },
+                                                        "status": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "businessBureauEvent": {
+                                                                    "type": "string",
+                                                                    "example": "09"
+                                                                },
+                                                                "businessBureauEventDesc": {
+                                                                    "type": "string",
+                                                                    "example": "INACTIVA"
+                                                                },
+                                                                "behaviourDate": {
+                                                                    "type": "string",
+                                                                    "example": "2024-07-31"
+                                                                }
+                                                            }
+                                                        },
+                                                        "values": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "rating": {
+                                                                        "type": "string",
+                                                                        "example": "-"
+                                                                    },
+                                                                    "ratingDesc": {
+                                                                        "type": "string",
+                                                                        "example": null
+                                                                    },
+                                                                    "behaviourDate": {
+                                                                        "type": "string",
+                                                                        "example": "2024-07-31"
+                                                                    },
+                                                                    "currencyType": {
+                                                                        "type": "integer",
+                                                                        "example": 1
+                                                                    },
+                                                                    "currencyTypeDesc": {
+                                                                        "type": "string",
+                                                                        "example": "Moneda Legal"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "liabilities": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "account": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "primaryKey": {
+                                                                    "type": "string",
+                                                                    "example": "10008084973505007205061329397000000000"
+                                                                },
+                                                                "block": {
+                                                                    "type": "boolean",
+                                                                    "example": false
+                                                                },
+                                                                "rating": {
+                                                                    "type": "integer",
+                                                                    "example": 1
+                                                                },
+                                                                "ratingDesc": {
+                                                                    "type": "string",
+                                                                    "example": "A"
+                                                                },
+                                                                "filingCityName": {
+                                                                    "type": "string",
+                                                                    "example": null
+                                                                },
+                                                                "filingCityCode": {
+                                                                    "type": "string",
+                                                                    "example": "00000000"
+                                                                },
+                                                                "counterpartyIdNumber": {
+                                                                    "type": "string",
+                                                                    "example": "050072"
+                                                                },
+                                                                "businessLineName": {
+                                                                    "type": "string",
+                                                                    "example": "B. FALABELLA CARTERA"
+                                                                },
+                                                                "accountOpeningDate": {
+                                                                    "type": "string",
+                                                                    "example": "2017-11-30"
+                                                                },
+                                                                "accountNumber": {
+                                                                    "type": "string",
+                                                                    "example": "061329397"
+                                                                },
+                                                                "filingOffice": {
+                                                                    "type": "string",
+                                                                    "example": "NO INFORMO"
+                                                                },
+                                                                "economicSector": {
+                                                                    "type": "integer",
+                                                                    "example": 1
+                                                                },
+                                                                "economicSectorName": {
+                                                                    "type": "string",
+                                                                    "example": "SECTOR FINANCIERO"
+                                                                },
+                                                                "stateOfAccountHolder": {
+                                                                    "type": "integer",
+                                                                    "example": 0
+                                                                },
+                                                                "stateOfAccountHolderDesc": {
+                                                                    "type": "string",
+                                                                    "example": "NORMAL"
+                                                                },
+                                                                "personId": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "personIdNumber": {
+                                                                            "type": "string",
+                                                                            "example": "00900047981"
+                                                                        },
+                                                                        "personIdType": {
+                                                                            "type": "integer",
+                                                                            "example": 2
+                                                                        },
+                                                                        "personIdDesc": {
+                                                                            "type": "string",
+                                                                            "example": "N\u00daMERO DE IDENTIFICACI\u00d3N TRIBUTARIA"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "subAccountTypeName": {
+                                                                    "type": "string",
+                                                                    "example": "CARTERA BANCARIA"
+                                                                },
+                                                                "accountType": {
+                                                                    "type": "string",
+                                                                    "example": "05"
+                                                                },
+                                                                "subAccountType": {
+                                                                    "type": "string",
+                                                                    "example": "00"
+                                                                },
+                                                                "accountTypeDesc": {
+                                                                    "type": "string",
+                                                                    "example": "CAB"
+                                                                },
+                                                                "subAccountTypeDesc": {
+                                                                    "type": "string",
+                                                                    "example": "CAB"
+                                                                }
+                                                            }
+                                                        },
+                                                        "liabilitiesAccount": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "expiryDate": {
+                                                                    "type": "string",
+                                                                    "example": "2018-12-05"
+                                                                },
+                                                                "paymentType": {
+                                                                    "type": "integer",
+                                                                    "example": 0
+                                                                },
+                                                                "paymentTypeDesc": {
+                                                                    "type": "string",
+                                                                    "example": "VIGENTE"
+                                                                },
+                                                                "businessBehaviourVectorProduct": {
+                                                                    "type": "string",
+                                                                    "example": "NNN-------------------------------------------- "
+                                                                },
+                                                                "probabilityOfDefault": {
+                                                                    "type": "integer",
+                                                                    "example": 75
+                                                                },
+                                                                "ratingHD": {
+                                                                    "type": "boolean",
+                                                                    "example": true
+                                                                }
+                                                            }
+                                                        },
+                                                        "featuresLiabilities": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "typeOfCredit": {
+                                                                    "type": "integer",
+                                                                    "example": 2
+                                                                },
+                                                                "typeOfCreditDesc": {
+                                                                    "type": "string",
+                                                                    "example": "CONSUMO"
+                                                                },
+                                                                "contractType": {
+                                                                    "type": "integer",
+                                                                    "example": 1
+                                                                },
+                                                                "contractTypeDesc": {
+                                                                    "type": "string",
+                                                                    "example": "Definido"
+                                                                },
+                                                                "contractTerm": {
+                                                                    "type": "integer",
+                                                                    "example": 0
+                                                                },
+                                                                "guaranteeType": {
+                                                                    "type": "integer",
+                                                                    "example": 1
+                                                                },
+                                                                "guaranteeTypeName": {
+                                                                    "type": "string",
+                                                                    "example": "ADMIS"
+                                                                },
+                                                                "contractExecution": {
+                                                                    "type": "integer",
+                                                                    "example": 2
+                                                                },
+                                                                "typeOfDebtor": {
+                                                                    "type": "string",
+                                                                    "example": "00"
+                                                                },
+                                                                "typeOfDebtorDesc": {
+                                                                    "type": "string",
+                                                                    "example": "PRINCIPAL: RESPONSABLE DEL PAGO"
+                                                                }
+                                                            }
+                                                        },
+                                                        "status": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "account": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "businessAccountStatus": {
+                                                                            "type": "string",
+                                                                            "example": "03"
+                                                                        },
+                                                                        "businessAccountStatusDesc": {
+                                                                            "type": "string",
+                                                                            "example": "PAGO TOTAL"
+                                                                        },
+                                                                        "accountStatusDate": {
+                                                                            "type": "string",
+                                                                            "example": "2020-10-31"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "origin": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "originStatusOfAccount": {
+                                                                            "type": "integer",
+                                                                            "example": 0
+                                                                        },
+                                                                        "originStatusOfAccountDesc": {
+                                                                            "type": "string",
+                                                                            "example": "NORMAL"
+                                                                        },
+                                                                        "dateOfOriginStatus": {
+                                                                            "type": "string",
+                                                                            "example": "2017-11-30"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "payment": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "businessBureauEvent": {
+                                                                            "type": "string",
+                                                                            "example": "08"
+                                                                        },
+                                                                        "businessBureauEventDesc": {
+                                                                            "type": "string",
+                                                                            "example": "PAGO VOLUNTARIO"
+                                                                        },
+                                                                        "paymentDate": {
+                                                                            "type": "string",
+                                                                            "example": "2018-02-28"
+                                                                        },
+                                                                        "paymentMonths": {
+                                                                            "type": "integer",
+                                                                            "example": 48
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "401": {
+                            "$ref": "#/components/responses/Unauthorized"
+                        },
+                        "403": {
+                            "$ref": "#/components/responses/Forbidden"
+                        },
+                        "404": {
+                            "$ref": "#/components/responses/NotFound"
+                        },
+                        "500": {
+                            "$ref": "#/components/responses/InternalServerError"
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Operaci\u00f3n exitosa"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "Unauthorized": {
+                "description": "El cliente actual no tiene relaci\u00f3n con el c\u00f3digo de usuario.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 401
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "unauthorized"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Cliente actual no tiene relaci\u00f3n con el c\u00f3digo de usuario."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe confirmar que el usuario haya realizado registro exitoso en el widget, ya que su informaci\u00f3n no se encuentra asociada al cliente."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Forbidden": {
+                "description": "El token ha caducado.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 403
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "forbidden"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "El token caduc\u00f3."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe solicitar un nuevo token por medio del servicio de autorizaci\u00f3n y volver a realizar la petici\u00f3n."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "NotFound": {
+                "description": "El producto no tiene informaci\u00f3n con el usuario a consultar.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 404
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "not found"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "El producto no tiene informaci\u00f3n con el usuario a consultar. El id producto o id usuario puede estar equivocado. La URL de la API no es correcta."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe confirmar que el usuario haya realizado registro exitoso en el widget, tambi\u00e9n validar id o documento del usuario, el id del producto a consultar o que la URL de la API se encuentra con la estructura correcta."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "InternalServerError": {
+                "description": "Error interno en la comunicaci\u00f3n con un tercero.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 500
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Error en comunicaci\u00f3n de Yoint con un tercero."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se deben comunicar inmediatamente con el equipo de soporte de Yoint."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

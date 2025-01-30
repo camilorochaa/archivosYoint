@@ -1,0 +1,211 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Yoint - Consulta Informaci\u00f3n Sisben",
+        "description": "Consulta si un usuario est\u00e1 registrado en Sisben y obt\u00e9n su nivel de riesgo.",
+        "termsOfService": "https://yoint.co/terminos-y-condiciones/",
+        "contact": {
+            "email": "sales@yoint.co"
+        },
+        "version": "17"
+    },
+    "paths": {
+        "/users/sisben": {
+            "post": {
+                "tags": [
+                    "Consulta Sisben"
+                ],
+                "summary": "Consulta de informaci\u00f3n de Sisben",
+                "description": "Consulta si un usuario est\u00e1 registrado en Sisben y obt\u00e9n su nivel de riesgo y datos personales.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "documentType": {
+                                        "type": "string",
+                                        "example": "C\u00e9dula de ciudadan\u00eda",
+                                        "description": "Tipo de documento: 'C\u00e9dula de ciudadan\u00eda', 'NIT', etc."
+                                    },
+                                    "document": {
+                                        "type": "string",
+                                        "example": "123456789",
+                                        "description": "N\u00famero de documento del usuario."
+                                    }
+                                },
+                                "required": [
+                                    "documentType",
+                                    "document"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informaci\u00f3n de Sisben obtenida exitosamente.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "document": {
+                                            "type": "string",
+                                            "example": "1083838743"
+                                        },
+                                        "documentType": {
+                                            "type": "string",
+                                            "example": "C\u00e9dula de ciudadan\u00eda"
+                                        },
+                                        "names": {
+                                            "type": "string",
+                                            "example": "JUAN PABLO"
+                                        },
+                                        "surnames": {
+                                            "type": "string",
+                                            "example": "BENAL TOLEDO"
+                                        },
+                                        "municipality": {
+                                            "type": "string",
+                                            "example": "Hobo"
+                                        },
+                                        "department": {
+                                            "type": "string",
+                                            "example": "Huila"
+                                        },
+                                        "record": {
+                                            "type": "string",
+                                            "example": "41349279502900000006"
+                                        },
+                                        "group": {
+                                            "type": "string",
+                                            "example": "B3"
+                                        },
+                                        "groupDescription": {
+                                            "type": "string",
+                                            "example": "Pobreza moderada"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "Unauthorized": {
+                "description": "Acceso no autorizado.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 401
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "unauthorized"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Cliente no autorizado."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Forbidden": {
+                "description": "El token ha caducado.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 403
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "forbidden"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "El token caduc\u00f3. Solicite uno nuevo."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "NotFound": {
+                "description": "Informaci\u00f3n no encontrada.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 404
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "not found"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Usuario o producto no encontrado."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "InternalServerError": {
+                "description": "Error interno del servidor.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 500
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Error en la comunicaci\u00f3n con un tercero."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

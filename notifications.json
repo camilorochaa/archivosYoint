@@ -1,0 +1,10 @@
+{
+    "openapi": "3.0.3",
+    "info": [],
+    "servers": [],
+    "paths": {
+        "/api.payments/v1/hook/notifications": [],
+        "/api.payments/v1/hook/notifications/{id}": []
+    },
+    "components": []
+}

@@ -1,0 +1,128 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Yoint Payments - Subscriptions",
+        "description": "API gesti\u00f3n de pagos recurrentes Yoint.",
+        "termsOfService": "https://yoint.co/terminos-y-condiciones/",
+        "contact": {
+            "email": "sales@yoint.co"
+        },
+        "version": "17"
+    },
+    "servers": [
+        {
+            "description": "SwaggerHub API Auto Mocking",
+            "url": "https://virtserver.swaggerhub.com/SANTIAGOSALAS/Yoint_Payments/17"
+        },
+        {
+            "description": "SwaggerHub API Auto Mocking",
+            "url": "https://virtserver.swaggerhub.com/Yoint_Payments/9"
+        },
+        {
+            "description": "development",
+            "url": "https://9mx05d1mpj.execute-api.us-east-1.amazonaws.com/develop"
+        }
+    ],
+    "paths": {
+        "/api/payments/v1/verify-account": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "operationId": "verifyAccount",
+                "summary": "Verifica si la cuenta bancaria entrante es v\u00e1lida.",
+                "security": [
+                    {
+                        "oauth2": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/VerifyAccountRequest"
+                            },
+                            "example": {
+                                "payer": {
+                                    "identityDocument": {
+                                        "type": "CC",
+                                        "number": "80154278"
+                                    },
+                                    "payerFullName": "Pedro Perez",
+                                    "phoneNumber": "300789654",
+                                    "email": "user@example.com",
+                                    "bankAccount": {
+                                        "type": "SAVINGS",
+                                        "number": "100124587745",
+                                        "financialEntity": {
+                                            "id": "1013"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Operaci\u00f3n exitosa"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "VerifyAccountRequest": {
+                "type": "object",
+                "properties": {
+                    "identityDocument": {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "example": "CC"
+                            },
+                            "number": {
+                                "type": "string",
+                                "example": "80154278"
+                            }
+                        }
+                    },
+                    "bankAccount": {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "example": "SAVINGS"
+                            },
+                            "number": {
+                                "type": "string",
+                                "example": "100124587745"
+                            },
+                            "financialEntity": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "example": 1013
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

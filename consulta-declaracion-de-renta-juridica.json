@@ -1,0 +1,723 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Yoint - Consulta declaraci\u00f3n de renta Juridica",
+        "description": "Obt\u00e9n la informaci\u00f3n que contiene la declaraci\u00f3n de renta tipo persona jur\u00eddica.",
+        "termsOfService": "https://yoint.co/terminos-y-condiciones/",
+        "contact": {
+            "email": "sales@yoint.co"
+        },
+        "version": "17"
+    },
+    "paths": {
+        "/users/dian/income-statement-company": {
+            "post": {
+                "tags": [
+                    "Consult legal companies declaration"
+                ],
+                "summary": "Consulta de declaraci\u00f3n de renta para empresas",
+                "description": "Obt\u00e9n la informaci\u00f3n que contiene el documento de declaraci\u00f3n de renta de un usuario tipo persona jur\u00eddica, cada campo representa el n\u00famero correspondiente al formulario de la DIAN.",
+                "parameters": [
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2020"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "userId": {
+                                        "type": "string",
+                                        "example": "i1",
+                                        "description": "Identificador \u00fanico del usuario."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informaci\u00f3n de la declaraci\u00f3n de renta de la empresa obtenida exitosamente.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "F110": {
+                                            "type": "object",
+                                            "properties": {
+                                                "f1_ANIO": {
+                                                    "type": "string",
+                                                    "example": "2020",
+                                                    "description": "A\u00f1o de la declaraci\u00f3n."
+                                                },
+                                                "f4_N_FORMULARIO": {
+                                                    "type": "string",
+                                                    "example": "1116604008861",
+                                                    "description": "N\u00famero de formulario de la declaraci\u00f3n."
+                                                },
+                                                "f5_NIT": {
+                                                    "type": "string",
+                                                    "example": "901301956",
+                                                    "description": "NIT de la empresa."
+                                                },
+                                                "f6_DV": {
+                                                    "type": "string",
+                                                    "example": "6",
+                                                    "description": "D\u00edgito de verificaci\u00f3n del NIT."
+                                                },
+                                                "f7_APELLIDO_1": {
+                                                    "type": "string",
+                                                    "example": "value",
+                                                    "description": "Primer apellido."
+                                                },
+                                                "f8_APELLIDO_2": {
+                                                    "type": "string",
+                                                    "example": "value",
+                                                    "description": "Segundo apellido."
+                                                },
+                                                "f9_NOMBRE_1": {
+                                                    "type": "string",
+                                                    "example": "value",
+                                                    "description": "Primer nombre."
+                                                },
+                                                "f10_OTROS_NOMBRES": {
+                                                    "type": "string",
+                                                    "example": "value",
+                                                    "description": "Otros nombres."
+                                                },
+                                                "f11_RAZON_SOCIAL": {
+                                                    "type": "string",
+                                                    "example": "Perfect Nails and Hair SAS",
+                                                    "description": "Raz\u00f3n social de la empresa."
+                                                },
+                                                "f12_COD_DIR_SECCIONAL": {
+                                                    "type": "string",
+                                                    "example": "32",
+                                                    "description": "C\u00f3digo de la direcci\u00f3n seccional."
+                                                },
+                                                "f24_ACTIVIDAD_ECONOMICA": {
+                                                    "type": "string",
+                                                    "example": "9602",
+                                                    "description": "C\u00f3digo de la actividad econ\u00f3mica."
+                                                },
+                                                "f25_COD": {
+                                                    "type": "string",
+                                                    "example": "value",
+                                                    "description": "C\u00f3digo adicional."
+                                                },
+                                                "f26_N_FORMULARIO_ANTERIOR": {
+                                                    "type": "string",
+                                                    "example": "value",
+                                                    "description": "N\u00famero del formulario anterior."
+                                                },
+                                                "f29_FRACCION_ANIO_GRAV_SIG": {
+                                                    "type": "string",
+                                                    "example": "value",
+                                                    "description": "Fracci\u00f3n del a\u00f1o gravable siguiente."
+                                                },
+                                                "f30_RENU_PERTE_REGI_TRIB_ESPE": {
+                                                    "type": "string",
+                                                    "example": "value",
+                                                    "description": "R\u00e9gimen tributario especial."
+                                                },
+                                                "f31_VINC_PAGO_OBRAS_IMPUESTOS": {
+                                                    "type": "string",
+                                                    "example": "value",
+                                                    "description": "Vinculaci\u00f3n a pago de obras e impuestos."
+                                                },
+                                                "f32_PERD_ACUM_ANIOS_ANT": {
+                                                    "type": "string",
+                                                    "example": "value",
+                                                    "description": "P\u00e9rdidas acumuladas de a\u00f1os anteriores."
+                                                },
+                                                "f33_TOTAL_COST_GASTOS_NOM": {
+                                                    "type": "integer",
+                                                    "example": 79760000,
+                                                    "description": "Total de costos y gastos relacionados con n\u00f3mina."
+                                                },
+                                                "f34_APORTES_SIST_SEG_SOCIAL": {
+                                                    "type": "integer",
+                                                    "example": 6330000,
+                                                    "description": "Aportes al sistema de seguridad social."
+                                                },
+                                                "f35_APORTES_SENA_ICBF_CAJA_COMP": {
+                                                    "type": "integer",
+                                                    "example": 2353000,
+                                                    "description": "Aportes al SENA, ICBF y Caja de Compensaci\u00f3n."
+                                                },
+                                                "f36_PATR_EFE_EQUI_EFE": {
+                                                    "type": "integer",
+                                                    "example": 27561000,
+                                                    "description": "Patrimonio efectivo equivalente efectivo."
+                                                },
+                                                "f37_PATR_INV_INSTR_FIN_DERI": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Patrimonio en instrumentos financieros derivados."
+                                                },
+                                                "f38_PATR_CUENTAS_DOC_ARR_FIN_COB": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Patrimonio en cuentas por cobrar de arrendamientos financieros."
+                                                },
+                                                "f39_PATR_INVENTARIOS": {
+                                                    "type": "integer",
+                                                    "example": 35597000,
+                                                    "description": "Patrimonio en inventarios."
+                                                },
+                                                "f40_PATR_ACT_INTANGIBLES": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Patrimonio en activos intangibles."
+                                                },
+                                                "f41_PATR_ACT_BIOLOGICOS": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Patrimonio en activos biol\u00f3gicos."
+                                                },
+                                                "f42_PATR_PROP_PLANT_EQUIP_PROP_INV": {
+                                                    "type": "integer",
+                                                    "example": 5301000,
+                                                    "description": "Patrimonio en propiedad, planta y equipo de inversi\u00f3n."
+                                                },
+                                                "f43_PATR_OTROS_ACTIVOS": {
+                                                    "type": "integer",
+                                                    "example": 3429000,
+                                                    "description": "Otros activos patrimoniales."
+                                                },
+                                                "f44_PATR_TOTAL_PATR_BRUTO": {
+                                                    "type": "integer",
+                                                    "example": 71888000,
+                                                    "description": "Total del patrimonio bruto."
+                                                },
+                                                "f45_PATR_PASIVOS": {
+                                                    "type": "integer",
+                                                    "example": 62468000,
+                                                    "description": "Total de pasivos de la empresa."
+                                                },
+                                                "f46_PATR_TOTAL_PATRI_LIQ": {
+                                                    "type": "integer",
+                                                    "example": 9420000,
+                                                    "description": "Patrimonio total l\u00edquido."
+                                                },
+                                                "f47_ING_ING_BRU_ACT_ORD": {
+                                                    "type": "integer",
+                                                    "example": 283281000,
+                                                    "description": "Ingresos brutos de la actividad ordinaria."
+                                                },
+                                                "f48_ING_ING_FINANCIEROS": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Ingresos financieros."
+                                                },
+                                                "f49_ING_DIV_NO_CONST_RENT": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Ingresos por dividendos no constantes."
+                                                },
+                                                "f50_ING_DIV_REC_CHC": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Ingresos por dividendos recibidos de sociedades del exterior."
+                                                },
+                                                "f51_ING_DIV_GRAV_TAR_GEN_SOC_EXTR": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Ingresos por dividendos gravados con tarifa general de sociedades extranjeras."
+                                                },
+                                                "f52_ING_DIV_TAR_GEN_SIN_RES_FIS_2016": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Ingresos por dividendos sin resoluci\u00f3n fiscal de 2016."
+                                                },
+                                                "f53_ING_DIV_TAR_GEN_SIN_RES_FIS_2017": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Ingresos por dividendos sin resoluci\u00f3n fiscal de 2017."
+                                                },
+                                                "f54_ING_DIV_GRAV_10": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Ingresos por dividendos gravados a la tarifa del 10%."
+                                                },
+                                                "f55_ING_DIV_GRAV_TAR_GEN": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Ingresos por dividendos gravados con tarifa general."
+                                                },
+                                                "f56_ING_DIV_PROV_": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Ingresos por dividendos provisionales."
+                                                },
+                                                "f57_ING_OTROS_INGRESOS": {
+                                                    "type": "integer",
+                                                    "example": 9307000,
+                                                    "description": "Otros ingresos de la empresa."
+                                                },
+                                                "f58_ING_TOTAL_ING_BRUTOS": {
+                                                    "type": "integer",
+                                                    "example": 9307000,
+                                                    "description": "Total de los ingresos brutos."
+                                                },
+                                                "f59_ING_DEV_REB_DESC_VEN": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Descuentos por devoluci\u00f3n de ventas."
+                                                },
+                                                "f60_ING_ING_NO_CONST_RENT": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Ingresos no constantes."
+                                                },
+                                                "f61_ING_TOTAL_ING_NETOS": {
+                                                    "type": "integer",
+                                                    "example": 292588000,
+                                                    "description": "Total de los ingresos netos."
+                                                },
+                                                "f62_COST_DED_COSTOS": {
+                                                    "type": "integer",
+                                                    "example": 53660000,
+                                                    "description": "Costos deducibles."
+                                                },
+                                                "f63_COST_DED_GAST_ADM": {
+                                                    "type": "integer",
+                                                    "example": 77492000,
+                                                    "description": "Gastos administrativos deducibles."
+                                                },
+                                                "f64_COST_DED_GAST_DIST_VEN": {
+                                                    "type": "integer",
+                                                    "example": 145717000,
+                                                    "description": "Gastos de distribuci\u00f3n y ventas deducibles."
+                                                },
+                                                "f65_COST_DED_GAST_FIN": {
+                                                    "type": "integer",
+                                                    "example": 5631000,
+                                                    "description": "Gastos financieros deducibles."
+                                                },
+                                                "f66_COST_DED_OTROS_GAST_DED": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Otros gastos deducibles."
+                                                },
+                                                "f67_COST_DED_TOTAL_COST_DED": {
+                                                    "type": "integer",
+                                                    "example": 282500000,
+                                                    "description": "Total de los costos y gastos deducibles."
+                                                },
+                                                "f68_ESAL_INV_EFEC_ANIO": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Inversi\u00f3n en efectivo durante el a\u00f1o."
+                                                },
+                                                "f69_INV_LIQ_PER_GRAV_ANT": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Inversi\u00f3n l\u00edquida de periodos gravables anteriores."
+                                                },
+                                                "f70_RENT_RENT_RECU_DED": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Rentas deducidas."
+                                                },
+                                                "f71_RENT_RENT_PASIVA_ECE": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Rentas pasivas exentas."
+                                                },
+                                                "f72_RENT_RENT_LIQ_ORD_EJE": {
+                                                    "type": "integer",
+                                                    "example": 10088000,
+                                                    "description": "Rentas l\u00edquidas ordinarias."
+                                                },
+                                                "f73_RENT_PERD_LIQ_EJE": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Rentas l\u00edquidas por p\u00e9rdida de ejecuci\u00f3n."
+                                                },
+                                                "f74_RENT_COMPENSACIONES": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Rentas compensadas."
+                                                },
+                                                "f75_RENT_RENT_LIQ": {
+                                                    "type": "integer",
+                                                    "example": 10088000,
+                                                    "description": "Rentas l\u00edquidas."
+                                                },
+                                                "f76_RENT_PRESUNTIVA": {
+                                                    "type": "integer",
+                                                    "example": 88000,
+                                                    "description": "Rentas presuntivas."
+                                                },
+                                                "f77_RENT_RENT_EXENTA": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Rentas exentas."
+                                                },
+                                                "f78_RENT_RENT_GRAV": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Rentas gravadas."
+                                                },
+                                                "f79_RENT_RENT_LIQ_GRAV": {
+                                                    "type": "integer",
+                                                    "example": 10088000,
+                                                    "description": "Rentas l\u00edquidas gravadas."
+                                                },
+                                                "f80_GAN_OCA_ING_GAN_OCA": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Ganancias operativas acumuladas."
+                                                },
+                                                "f81_GAN_OCA_REN_DEU_LEY_1116": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Ganancia operativa de acuerdo con la ley 1116."
+                                                },
+                                                "f82_GAN_OCA_UTI_PERD_FIS_ACU": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Utilidad o p\u00e9rdida fiscal acumulada."
+                                                },
+                                                "f83_GAN_OCA_COST_GAN_OCA": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Costos de ganancias operativas acumuladas."
+                                                },
+                                                "f84_GAN_OCA_GAN_OCA_NO_GRAV_EXE": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Ganancia operativa no gravada."
+                                                },
+                                                "f85_GAN_OCA_GAN_OCA_GRAV": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Ganancia operativa de ganancia ordinaria."
+                                                },
+                                                "f86_LIQ_PRIV_IMP_RENT_LIQ_GRAV": {
+                                                    "type": "integer",
+                                                    "example": 3228000,
+                                                    "description": "Monto del impuesto de renta gravable."
+                                                },
+                                                "f87_LIQ_PRIV_DIV_GRAV_10": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Monto de dividendos gravados al 10%."
+                                                },
+                                                "f88_LIQ_PRIV_IMP_DIV_GRAV_ART_240_55": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Monto de impuestos sobre dividendos seg\u00fan art\u00edculo 240-55."
+                                                },
+                                                "f89_LIQ_PRIV_IMP_DIV_GRAV_27": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Monto de impuestos sobre dividendos gravados al 27%."
+                                                },
+                                                "f90_LIQ_PRIV_IMP_DIV_GRAV_ART_240_53": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Monto de impuestos sobre dividendos seg\u00fan art\u00edculo 240-53."
+                                                },
+                                                "f91_LIQ_PRIV_IMP_DIV_TAR_33": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Monto de impuestos sobre dividendos con tarifa del 33%."
+                                                },
+                                                "f92_LIQ_PRIV_TOTAL_IMP_RENT_LIQ_GRAV": {
+                                                    "type": "integer",
+                                                    "example": 3228000,
+                                                    "description": "Total del impuesto de renta gravable."
+                                                },
+                                                "f93_LIQ_PRIV_DESC_TRIB": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Descuentos tributarios aplicados."
+                                                },
+                                                "f94_LIQ_PRIV_IMP_NETO_RENT": {
+                                                    "type": "integer",
+                                                    "example": 3228000,
+                                                    "description": "Impuesto neto de renta."
+                                                },
+                                                "f95_LIQ_PRIV_IMP_GAN_OCA": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Impuesto sobre ganancias ocasionales."
+                                                },
+                                                "f96_LIQ_PRIV_DESC_IMP_PAG_EXT": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Descuentos por pagos de impuestos extendidos."
+                                                },
+                                                "f97_LIQ_PRIV_TOTAL_IMP_CARGO": {
+                                                    "type": "integer",
+                                                    "example": 3228000,
+                                                    "description": "Total del impuesto a cargo."
+                                                },
+                                                "f98_LIQ_PRIV_VAL_INV_OBRA_IMP_50": {
+                                                    "type": "integer",
+                                                    "example": 3228000,
+                                                    "description": "Valor de inversi\u00f3n en obra, del 50%."
+                                                },
+                                                "f99_LIQ_PRIV_DESC_EFE_INV_OBRA_IMP": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Descuento efectivo de inversi\u00f3n en obra."
+                                                },
+                                                "f100_LIQ_PRIV_CRED_FIS_ART_256_1": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Cr\u00e9dito fiscal art\u00edculo 256-1."
+                                                },
+                                                "f101_LIQ_PRIV_ANTIC_REN_LIQ_ANIO_ANT": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Anticipo de renta del a\u00f1o anterior."
+                                                },
+                                                "f102_LIQ_PRIV_SAL_FAVOR_ANIO_ANT_SIN_SOL": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Saldo a favor del a\u00f1o anterior sin solicitud de devoluci\u00f3n."
+                                                },
+                                                "f103_LIQ_PRIV_AUTORRETENCIONES": {
+                                                    "type": "integer",
+                                                    "example": 2341000,
+                                                    "description": "Autorretenciones realizadas por la empresa."
+                                                },
+                                                "f104_LIQ_PRIV_OTRAS_RETENCIONES": {
+                                                    "type": "integer",
+                                                    "example": 4316000,
+                                                    "description": "Otras retenciones realizadas."
+                                                },
+                                                "f105_LIQ_PRIV_TOTAL_RET_ANIO_GRAV_DEC": {
+                                                    "type": "integer",
+                                                    "example": 6657000,
+                                                    "description": "Total de retenciones del a\u00f1o gravable."
+                                                },
+                                                "f106_LIQ_PRIV_ANTIC_RENT_ANIO_GRAV_SIG": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Anticipo de renta del a\u00f1o siguiente."
+                                                },
+                                                "f107_LIQ_PRIV_ANTIC_SOBRET_INST_FIN_ANT": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Anticipo de sobretasa del impuesto financiero del a\u00f1o anterior."
+                                                },
+                                                "f108_LIQ_PRIV_SOBRET_INS_FIN": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Sobretasa sobre el impuesto financiero."
+                                                },
+                                                "f109_LIQ_PRIV_ANTIC_SOBRET_INS_FIN_SIG": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Anticipo de sobretasa sobre el impuesto financiero del a\u00f1o siguiente."
+                                                },
+                                                "f110_LIQ_PRIV_SAL_PAG_IMPUESTO": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Saldo pagado de impuestos."
+                                                },
+                                                "f111_LIQ_PRIV_SANCIONES": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Sanciones aplicadas a la empresa."
+                                                },
+                                                "f112_LIQ_PRIV_TOTAL_SAL_PAGAR": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Total saldo a pagar por impuestos."
+                                                },
+                                                "f113_LIQ_PRIV_TOTAL_SAL_FAVOR": {
+                                                    "type": "integer",
+                                                    "example": 3429000,
+                                                    "description": "Total saldo a favor de la empresa."
+                                                },
+                                                "f114_VAL_IMP_EXI_OBRA_IMP": {
+                                                    "type": "integer",
+                                                    "example": 3429000,
+                                                    "description": "Valor de la exenci\u00f3n de impuestos sobre obras."
+                                                },
+                                                "f115_VAL_TOTAL_PROY_OBRA_IMP": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Valor total del proyecto de obra e impuestos."
+                                                },
+                                                "f980_PAGO_TOTAL": {
+                                                    "type": "integer",
+                                                    "example": 0,
+                                                    "description": "Total de pagos realizados."
+                                                },
+                                                "f981_COD_REPRESENTACION": {
+                                                    "type": "string",
+                                                    "example": "value",
+                                                    "description": "C\u00f3digo de representaci\u00f3n."
+                                                },
+                                                "f982_COD_CONTADOR": {
+                                                    "type": "string",
+                                                    "example": "value",
+                                                    "description": "C\u00f3digo del contador."
+                                                },
+                                                "f983_NO_TARJETA_PROF": {
+                                                    "type": "string",
+                                                    "example": 20210875164583,
+                                                    "description": "N\u00famero de tarjeta profesional."
+                                                },
+                                                "f997_ESP_EXCL_ENTI_RECAUDADORA": {
+                                                    "type": "string",
+                                                    "example": "2021-04-27/06:55:49PM",
+                                                    "description": "Fecha y hora de exclusi\u00f3n del ente recaudador."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "#/components/responses/Unauthorized"
+                },
+                "403": {
+                    "$ref": "#/components/responses/Forbidden"
+                },
+                "404": {
+                    "$ref": "#/components/responses/NotFound"
+                },
+                "500": {
+                    "$ref": "#/components/responses/InternalServerError"
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "Unauthorized": {
+                "description": "El cliente actual no tiene relaci\u00f3n con el c\u00f3digo de usuario.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 401
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "unauthorized"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Cliente actual no tiene relaci\u00f3n con el c\u00f3digo de usuario."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe confirmar que el usuario haya realizado registro exitoso en el widget, ya que su informaci\u00f3n no se encuentra asociada al cliente."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Forbidden": {
+                "description": "El token ha caducado.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 403
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "forbidden"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "El token caduc\u00f3."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe solicitar un nuevo token por medio del servicio de autorizaci\u00f3n y volver a realizar la petici\u00f3n."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "NotFound": {
+                "description": "El producto no tiene informaci\u00f3n con el usuario a consultar.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 404
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "not found"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "El producto no tiene informaci\u00f3n con el usuario a consultar. El id producto o id usuario puede estar equivocado. La URL de la API no es correcta."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe confirmar que el usuario haya realizado registro exitoso en el widget, tambi\u00e9n validar id o documento del usuario, el id del producto a consultar o que la URL de la API se encuentra con la estructura correcta."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "InternalServerError": {
+                "description": "Error interno en la comunicaci\u00f3n con un tercero.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 500
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Error en comunicaci\u00f3n de Yoint con un tercero."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se deben comunicar inmediatamente con el equipo de soporte de Yoint."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

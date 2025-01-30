@@ -1,0 +1,582 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Yoint - consulta declaraci\u00f3n de IVA",
+        "description": "Obt\u00e9n la informaci\u00f3n de la declaraci\u00f3n de IVA de una empresa.",
+        "termsOfService": "https://yoint.co/terminos-y-condiciones/",
+        "contact": {
+            "email": "sales@yoint.co"
+        },
+        "version": "17"
+    },
+    "paths": {
+        "/users/dian/statement-iva": {
+            "post": {
+                "tags": [
+                    "Consult IVA declaration"
+                ],
+                "summary": "Consulta de declaraci\u00f3n de IVA",
+                "description": "Obt\u00e9n la informaci\u00f3n contenida en el documento de declaraci\u00f3n de IVA de una empresa. Especifica el a\u00f1o de la declaraci\u00f3n en los par\u00e1metros de la consulta.",
+                "parameters": [
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "userId": {
+                                        "type": "string",
+                                        "example": "i1",
+                                        "description": "Identificador \u00fanico del usuario."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informaci\u00f3n de la declaraci\u00f3n de IVA obtenida exitosamente.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "F300": {
+                                            "type": "object",
+                                            "properties": {
+                                                "f1_ANIO": {
+                                                    "type": "string",
+                                                    "example": 2021
+                                                },
+                                                "f3_PERIODO": {
+                                                    "type": "integer",
+                                                    "example": 3
+                                                },
+                                                "f4_N_FORMULARIO": {
+                                                    "type": "string",
+                                                    "example": 300000000003
+                                                },
+                                                "f5_NIT": {
+                                                    "type": "string",
+                                                    "example": 900000005
+                                                },
+                                                "f6_DV": {
+                                                    "type": "string",
+                                                    "example": "2"
+                                                },
+                                                "f7_APELLIDO_1": {
+                                                    "type": "string",
+                                                    "example": "value"
+                                                },
+                                                "f8_APELLIDO_2": {
+                                                    "type": "string",
+                                                    "example": "value"
+                                                },
+                                                "f9_NOMBRE_1": {
+                                                    "type": "string",
+                                                    "example": "value"
+                                                },
+                                                "f10_OTROS_NOMBRES": {
+                                                    "type": "string",
+                                                    "example": "value"
+                                                },
+                                                "f11_RAZ\u00d3N_SOCIAL": {
+                                                    "type": "string",
+                                                    "example": "INVERSIONES LATSAS"
+                                                },
+                                                "f12_COD_DIR_SECCIONAL": {
+                                                    "type": "integer",
+                                                    "example": 32
+                                                },
+                                                "f24_PERI_DECLARACI\u00d3N": {
+                                                    "type": "string",
+                                                    "example": "Cuatrimestral"
+                                                },
+                                                "f25_COD": {
+                                                    "type": "string",
+                                                    "example": "value"
+                                                },
+                                                "f26_N_FORMULARIO_ANT": {
+                                                    "type": "string",
+                                                    "example": "value"
+                                                },
+                                                "f27_ING_OPER_GRAV_5": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f28_ING_OPER_GRAV_TARI_GEN": {
+                                                    "type": "integer",
+                                                    "example": 108408000
+                                                },
+                                                "f29_ING_AIU_OPER_GRAV": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f30_ING_EXPO_BIENES": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f31_ING_EXPO_SERVICIOS": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f32_ING_VEN_SOC_COMER_INTERN": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f33_ING_VEN_ZONAS_FRANCAS": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f34_ING_JUEGOS_AZAR_SUERTE": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f35_ING_OPER_EXENTAS": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f36_ING_VENT_CERV_NAC_IMPOR": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f37_ING_VEN_GASE_SIMIL": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f38_ING_VEN_LIC_APER_VIN": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f39_ING_OPER_EXCLUIDAS": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f40_ING_OPER_NO_GRAV": {
+                                                    "type": "integer",
+                                                    "example": 2000
+                                                },
+                                                "f41_ING_TOTAL_ING_BRUTOS": {
+                                                    "type": "integer",
+                                                    "example": 108410000
+                                                },
+                                                "f42_ING_DEV_VEN_ANUL_RESC_RES": {
+                                                    "type": "integer",
+                                                    "example": 379000
+                                                },
+                                                "f43_ING_TOTAL_ING_NETOS": {
+                                                    "type": "integer",
+                                                    "example": 108031000
+                                                },
+                                                "f44_COM_IMP_BIE_GRAV_TAR_5": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f45_COM_IMP_BIE_GRAV_TAR_GEN": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f46_COM_IMP_BIE_SERV_GRAV_Z_FRAN": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f47_COMP_IMP_BIE_NO_GRAV": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f48_COMP_IMP_BIE_EXCL_EXE": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f49_COMP_IMP_SERVICIOS": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f50_COMP_NAC_BIE_GRAV_TAR_5": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f51_COMP_NAC_BIE_GRAV_TAR_GEN": {
+                                                    "type": "integer",
+                                                    "example": 9167000
+                                                },
+                                                "f52_COMP_NAC_SER_GRAV_TAR_5": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f53_COMP_NAC_SER_GRAV_TAR_GEN": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f54_COMP_NAC_BIE_SER_EXCL_EXE": {
+                                                    "type": "integer",
+                                                    "example": 12213000
+                                                },
+                                                "f55_COM_TOTAL_COMP_IMP_BRUTAS": {
+                                                    "type": "integer",
+                                                    "example": 21380000
+                                                },
+                                                "f56_COMP_DEV_COMP_ANUL_RESC_RES": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f57_COMP_TOTAL_COMP_NETAS": {
+                                                    "type": "integer",
+                                                    "example": 21380000
+                                                },
+                                                "f58_LIQ_PRIV_IMP_GEN_TAR_5": {
+                                                    "type": "integer",
+                                                    "example": 21380000
+                                                },
+                                                "f59_LIQ_PRIV_IMP_GEN_TAR_GEN": {
+                                                    "type": "integer",
+                                                    "example": 20598000
+                                                },
+                                                "f60_LIQ_PRIV_IMP_GEN_AIU_OPER": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f61_LIQ_PRIV_IMP_GEN_JUE_AZAR": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f62_LIQ_PRIV_IMP_GEN_VEN_CERV": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f63_LIQ_PRIV_IMP_GEN_VEN_GAS": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f64_LIQ_PRIV_IMP_GEN_VEN_LIC": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f65_LIQ_PRIV_IMP_GEN_INV_ACT_FIJOS": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f66_LIQ_PRIV_IMP_GEN_IVA_REC_DEV": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f67_LIQ_PRIV_IMP_GEN_TOT_IMP_GEN": {
+                                                    "type": "integer",
+                                                    "example": 20598000
+                                                },
+                                                "f68_LIQ_PRIV_IMP_GEN_IMP_GRAV_TAR_5": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f69_LIQ_PRIV_IMP_GEN_IMP_GRAV_TAR_GEN": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f70_LIQ_PRIV_IMP_GEN_SERV_GRAV_Z_FRAN": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f71_LIQ_PRIV_IMP_GEN_BIE_GRAV_TAR_5": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f72_LIQ_PRIV_IMP_GEN_BIE_GRAV_TAR_GEN": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f73_LIQ_PRIV_IMP_GEN_VEN_LIC_APER_VIN": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f74_LIQ_PRIV_IMP_GEN_SER_GRAV_TAR_5": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f75_LIQ_PRIV_IMP_GEN_SER_GRAV_TAR_GEN": {
+                                                    "type": "integer",
+                                                    "example": 1742000
+                                                },
+                                                "f76_LIQ_PRIV_IMP_GEN_DESC_IVA_EXP_HIDC": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f77_LIQ_PRIV_IMP_GEN_TOT_IMP_PAG": {
+                                                    "type": "integer",
+                                                    "example": 1742000
+                                                },
+                                                "f78_LIQ_PRIV_IMP_GEN_IVA_RET_SER_PRES": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f79_LIQ_PRIV_IMP_GEN_IVA_REC_DEV": {
+                                                    "type": "integer",
+                                                    "example": 72000
+                                                },
+                                                "f80_LIQ_PRIV_IMP_GEN_AJU_IMP_DESC": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f81_LIQ_PRIV_IMP_GEN_TOT_IMP_DESC": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f82_LIQ_PRIV_SALD_PAG_PER_FISCAL": {
+                                                    "type": "integer",
+                                                    "example": 18784000
+                                                },
+                                                "f83_LIQ_PRIV_SALD_FAV_PER_FISCAL": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f84_LIQ_PRIV_SAL_FAV_PER_FIS_ANT": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f85_LIQ_PRIV_RET_IVA_PRAC": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f86_LIQ_PRIV_SALD_PAG_IMPUESTO": {
+                                                    "type": "integer",
+                                                    "example": 18784000
+                                                },
+                                                "f87_LIQ_PRIV_SANCIONES": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f88_LIQ_PRIV_TOTAL_SAL_PAGAR": {
+                                                    "type": "integer",
+                                                    "example": 18784000
+                                                },
+                                                "f89_LIQ_PRIV_TOTAL_SAL_FAVOR": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f90_CONT_SAL_SAL_FAV_SUC_DEV_COMP_PER_ACT": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f91_CONT_SAL_SAL_FAV_SUC_DEV_COMP_PER_SIG": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f92_CONT_SAL_SAL_FAV_SIN_DER_DEV_PER_SIG": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f93_CONT_SAL_TOT_SAL_FAV_PER_SIG": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f100_1_ANT_IVA_PAG_REG_SIM_BIM": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f100_2_ANT_IVA_PAG_REG_SIM_BIM": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f100_3_ANT_IVA_PAG_REG_SIM_BIM": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f100_4_ANT_IVA_PAG_REG_SIM_BIM": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f100_5_ANT_IVA_PAG_REG_SIM_BIM": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f100_6_ANT_IVA_PAG_REG_SIM_BIM": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f101_N_ID_SIGNATAIO": {
+                                                    "type": "string",
+                                                    "example": "value"
+                                                },
+                                                "f102_DV": {
+                                                    "type": "string",
+                                                    "example": "value"
+                                                },
+                                                "f980_PAGO_TOTAL": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "f981_COD_REPRESENTACI\u00d3N": {
+                                                    "type": "string",
+                                                    "example": "value"
+                                                },
+                                                "f982_COD_CONTADOR": {
+                                                    "type": "string",
+                                                    "example": "value"
+                                                },
+                                                "f983_N_TARJETA_PROF": {
+                                                    "type": "string",
+                                                    "example": "20221464639103"
+                                                },
+                                                "f994_SALVEDADES": {
+                                                    "type": "string",
+                                                    "example": "value"
+                                                },
+                                                "f996_N_INT_DIAN": {
+                                                    "type": "string",
+                                                    "example": "91000868620824"
+                                                },
+                                                "f997_ESP_EXCL_ENTI_RECAUDADORA": {
+                                                    "type": "string",
+                                                    "example": "value"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "#/components/responses/Unauthorized"
+                },
+                "403": {
+                    "$ref": "#/components/responses/Forbidden"
+                },
+                "404": {
+                    "$ref": "#/components/responses/NotFound"
+                },
+                "500": {
+                    "$ref": "#/components/responses/InternalServerError"
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "Unauthorized": {
+                "description": "El cliente actual no tiene relaci\u00f3n con el c\u00f3digo de usuario.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 401
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "unauthorized"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Cliente actual no tiene relaci\u00f3n con el c\u00f3digo de usuario."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe confirmar que el usuario haya realizado registro exitoso en el widget, ya que su informaci\u00f3n no se encuentra asociada al cliente."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Forbidden": {
+                "description": "El token ha caducado.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 403
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "forbidden"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "El token caduc\u00f3."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe solicitar un nuevo token por medio del servicio de autorizaci\u00f3n y volver a realizar la petici\u00f3n."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "NotFound": {
+                "description": "El producto no tiene informaci\u00f3n con el usuario a consultar.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 404
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "not found"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "El producto no tiene informaci\u00f3n con el usuario a consultar. El id producto o id usuario puede estar equivocado. La URL de la API no es correcta."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe confirmar que el usuario haya realizado registro exitoso en el widget, tambi\u00e9n validar id o documento del usuario, el id del producto a consultar o que la URL de la API se encuentra con la estructura correcta."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "InternalServerError": {
+                "description": "Error interno en la comunicaci\u00f3n con un tercero.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 500
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Error en comunicaci\u00f3n de Yoint con un tercero."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se deben comunicar inmediatamente con el equipo de soporte de Yoint."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

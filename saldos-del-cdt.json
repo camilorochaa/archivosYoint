@@ -1,0 +1,260 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Yoint - saldos del CDT por banco",
+        "description": "obten los productos de CDT con sus saldos para usuario y banco",
+        "termsOfService": "https://yoint.co/terminos-y-condiciones/",
+        "contact": {
+            "email": "sales@yoint.co"
+        },
+        "version": "17"
+    },
+    "paths": {
+        "/users/cdts": {
+            "post": {
+                "tags": [
+                    "saldos CDT"
+                ],
+                "summary": "Saldos de CDT por banco",
+                "description": "Obt\u00e9n los productos de CDT con sus saldos para un usuario y banco.",
+                "parameters": [
+                    {
+                        "name": "bank-id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "3"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "userId": {
+                                        "type": "string",
+                                        "example": "i1",
+                                        "description": "Identificador del usuario."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Saldos de CDT obtenidos exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "bank": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 3
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "BBVA"
+                                                    },
+                                                    "code": {
+                                                        "type": "string",
+                                                        "example": "0013"
+                                                    }
+                                                }
+                                            },
+                                            "cdts": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "number": {
+                                                            "type": "string",
+                                                            "example": "00130720000000000009"
+                                                        },
+                                                        "capitalCreditAccount": {
+                                                            "type": "string",
+                                                            "example": "00130720000000000009"
+                                                        },
+                                                        "creationDate": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2022-02-10T19:24:08.333+00:00"
+                                                        },
+                                                        "dueDate": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": null
+                                                        },
+                                                        "interestRate": {
+                                                            "type": "number",
+                                                            "example": null
+                                                        },
+                                                        "investmentTerm": {
+                                                            "type": "string",
+                                                            "example": null
+                                                        },
+                                                        "cdtsBalance": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "availableBalance": {
+                                                                    "type": "number",
+                                                                    "example": 8000000
+                                                                },
+                                                                "total": {
+                                                                    "type": "number",
+                                                                    "example": 8000000
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "Unauthorized": {
+                "description": "El cliente actual no tiene relaci\u00f3n con el c\u00f3digo de usuario.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 401
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "unauthorized"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Cliente actual no tiene relaci\u00f3n con el c\u00f3digo de usuario."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe confirmar que el usuario haya realizado registro exitoso en el widget, ya que su informaci\u00f3n no se encuentra asociada al cliente."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Forbidden": {
+                "description": "El token ha caducado.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 403
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "forbidden"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "El token caduc\u00f3."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe solicitar un nuevo token por medio del servicio de autorizaci\u00f3n y volver a realizar la petici\u00f3n."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "NotFound": {
+                "description": "El producto no tiene informaci\u00f3n con el usuario a consultar.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 404
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "not found"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "El producto no tiene informaci\u00f3n con el usuario a consultar. El id producto o id usuario puede estar equivocado. La URL de la API no es correcta."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe confirmar que el usuario haya realizado registro exitoso en el widget, tambi\u00e9n validar id o documento del usuario, el id del producto a consultar o que la URL de la API se encuentra con la estructura correcta."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "InternalServerError": {
+                "description": "Error interno en la comunicaci\u00f3n con un tercero.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 500
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Error en comunicaci\u00f3n de Yoint con un tercero."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se deben comunicar inmediatamente con el equipo de soporte de Yoint."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

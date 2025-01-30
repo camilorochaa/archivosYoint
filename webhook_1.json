@@ -1,0 +1,276 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Yoint Payments - Subscriptions",
+        "description": "API gesti\u00f3n de pagos recurrentes Yoint.",
+        "termsOfService": "https://yoint.co/terminos-y-condiciones/",
+        "contact": {
+            "email": "sales@yoint.co"
+        },
+        "version": "17"
+    },
+    "servers": [
+        {
+            "description": "SwaggerHub API Auto Mocking",
+            "url": "https://virtserver.swaggerhub.com/SANTIAGOSALAS/Yoint_Payments/17"
+        },
+        {
+            "description": "SwaggerHub API Auto Mocking",
+            "url": "https://virtserver.swaggerhub.com/Yoint_Payments/9"
+        },
+        {
+            "description": "development",
+            "url": "https://9mx05d1mpj.execute-api.us-east-1.amazonaws.com/develop"
+        }
+    ],
+    "paths": {
+        "/api/payments/v1/hook/notifications": {
+            "post": {
+                "tags": [
+                    "WebHook Notifications"
+                ],
+                "operationId": "configurar web hook",
+                "summary": "registar el endpoint para el regreso de la informacion.",
+                "security": [
+                    {
+                        "oauth2": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OneShotPayment"
+                            },
+                            "example": {
+                                "UrlWebHook": "www.tuUrlparaconfigurar.com",
+                                "ListStates": {
+                                    "completed": "ok",
+                                    "pending": "ok",
+                                    "failure": "ok"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaymentCreationResponse"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Operaci\u00f3n exitosa"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "WebHook Notifications"
+                ],
+                "operationId": "configurar web hook get",
+                "summary": "endpoint para el regreso de la informacion.",
+                "security": [
+                    {
+                        "oauth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WebHookGet"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/payments/v1/hook/notifications/{id}": {
+            "delete": {
+                "tags": [
+                    "WebHook Notifications"
+                ],
+                "operationId": "configurar web hook delete",
+                "summary": "elimina el endpoint registrado como web hook.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Identificador del webhook que se quiere eliminar"
+                    }
+                ],
+                "security": [
+                    {
+                        "oauth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WebHookGet"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PaymentCreationResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "example": 1
+                    }
+                }
+            },
+            "Payer": {
+                "type": "object",
+                "properties": {
+                    "paymentInfo": {
+                        "type": "object",
+                        "properties": {
+                            "payerFullName": {
+                                "type": "string",
+                                "example": "John Doe"
+                            },
+                            "identityDocument": {
+                                "type": "object",
+                                "properties": {
+                                    "type": {
+                                        "type": "string",
+                                        "example": "CC"
+                                    },
+                                    "number": {
+                                        "type": "string",
+                                        "example": "80154278"
+                                    }
+                                }
+                            },
+                            "bankAccount": {
+                                "type": "object",
+                                "properties": {
+                                    "type": {
+                                        "type": "string",
+                                        "example": "SAVINGS"
+                                    },
+                                    "number": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "example": "100124587745"
+                                    },
+                                    "financialEntity": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "example": "1013"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "creditCard": {
+                                "type": "object",
+                                "nullable": true,
+                                "properties": {
+                                    "pan": {
+                                        "type": "string",
+                                        "example": "XXXXXXXXXXXX2345"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "Solo se permite tarjeta o n\u00famero de cuenta, no ambas",
+                "required": [
+                    "identityDocument",
+                    "bankAccount"
+                ]
+            },
+            "WebHookGet": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "key": {
+                                    "type": "string"
+                                },
+                                "value": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "example": [
+                            {
+                                "id": "1",
+                                "value": "exampleUrlNotification"
+                            },
+                            {
+                                "id": "2",
+                                "value": "exampleUrlnotification"
+                            }
+                        ]
+                    }
+                }
+            },
+            "OneShotPayment": {
+                "type": "object",
+                "properties": {
+                    "amount": {
+                        "type": "number",
+                        "format": "double",
+                        "example": 125741
+                    },
+                    "paymentDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-07-04T00:00:00+05:00"
+                    },
+                    "chargeDescription": {
+                        "type": "string",
+                        "example": "Compra comercio ABC"
+                    },
+                    "iva": {
+                        "type": "number",
+                        "format": "double",
+                        "example": 19
+                    },
+                    "payer": {
+                        "$ref": "#/components/schemas/Payer"
+                    }
+                }
+            }
+        }
+    }
+}

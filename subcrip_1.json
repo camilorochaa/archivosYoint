@@ -1,0 +1,185 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Yoint Payments - Subscriptions",
+        "description": "API gesti\u00f3n de pagos recurrentes Yoint.",
+        "termsOfService": "https://yoint.co/terminos-y-condiciones/",
+        "contact": {
+            "email": "sales@yoint.co"
+        },
+        "version": "17"
+    },
+    "servers": [
+        {
+            "description": "SwaggerHub API Auto Mocking",
+            "url": "https://virtserver.swaggerhub.com/SANTIAGOSALAS/Yoint_Payments/17"
+        },
+        {
+            "description": "SwaggerHub API Auto Mocking",
+            "url": "https://virtserver.swaggerhub.com/Yoint_Payments/9"
+        },
+        {
+            "description": "development",
+            "url": "https://9mx05d1mpj.execute-api.us-east-1.amazonaws.com/develop"
+        }
+    ],
+    "paths": {
+        "/api/payments/v1/subscriptions/{order-id}": {
+            "put": {
+                "tags": [
+                    "Subscriptions"
+                ],
+                "operationId": "modifySubscription",
+                "summary": "Modifica par\u00e1metros de ejecuci\u00f3n de una subscripci\u00f3n, sin embargo, no se puede modificar el pagador, ni el valor de la suscripci\u00f3n. De ser lo \u00faltimo necesario, la sugerencia es eliminar la subscripci\u00f3n y volver a crear una nueva.",
+                "security": [
+                    {
+                        "oauth2": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "order-id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "ID de la suscripci\u00f3n a modificar"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Subscription"
+                            },
+                            "example": {
+                                "starts": "2024-11-22T00:00:00-05:00",
+                                "ends": "2024-12-22T00:00:00-05:00",
+                                "runInterval": 1,
+                                "intervalUnit": "MONTHLY",
+                                "chargeDescription": "Compra comercio ABC",
+                                "retryOnFail": true,
+                                "maxRetries": 1,
+                                "retryInterval": 1,
+                                "retryIntervalUnit": "MONTHLY"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Operaci\u00f3n exitosa"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Subscriptions"
+                ],
+                "summary": "Elimina una suscripci\u00f3n existente.",
+                "security": [
+                    {
+                        "oauth2": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "order-id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "ID de la suscripci\u00f3n a eliminar"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Operaci\u00f3n exitosa"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Subscription": {
+                "type": "object",
+                "properties": {
+                    "orderId": {
+                        "type": "string",
+                        "example": "aba1621d-4fd5-4d4b-b56e-2d294814d103"
+                    },
+                    "starts": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-11-03T00:00:00Z"
+                    },
+                    "ends": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-12-03T00:00:00Z"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "double",
+                        "example": 2222
+                    },
+                    "runInterval": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "intervalUnit": {
+                        "type": "string",
+                        "example": "DAILY"
+                    },
+                    "nextRun": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-11-04T00:00:00Z"
+                    },
+                    "chargeDescription": {
+                        "type": "string",
+                        "example": "Compra comercio ABC"
+                    },
+                    "retryOnFail": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "maxRetries": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "retryInterval": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "retryIntervalUnit": {
+                        "type": "string",
+                        "example": "DAILY"
+                    }
+                }
+            }
+        }
+    }
+}

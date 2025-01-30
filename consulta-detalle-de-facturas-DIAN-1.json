@@ -1,0 +1,428 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Yoint - consulta detalle de factura",
+        "description": "Obt\u00e9n el detalle de una factura espec\u00edfica de una empresa o jur\u00eddica.",
+        "termsOfService": "https://yoint.co/terminos-y-condiciones/",
+        "contact": {
+            "email": "sales@yoint.co"
+        },
+        "version": "17"
+    },
+    "paths": {
+        "/users/dian/detailbillcompany": {
+            "post": {
+                "tags": [
+                    "Consult DIAN billing details"
+                ],
+                "summary": "Consulta detalle de factura",
+                "description": "Obt\u00e9n el detalle de una factura espec\u00edfica de una empresa.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "userId": {
+                                        "type": "string",
+                                        "example": "i1",
+                                        "description": "Identificador \u00fanico del usuario."
+                                    },
+                                    "docId": {
+                                        "type": "string",
+                                        "example": "20240221094139854169722",
+                                        "description": "Identificador \u00fanico de la factura."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Detalle de factura obtenido exitosamente.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "billId": {
+                                            "type": "string",
+                                            "example": "20240221094139854169722",
+                                            "description": "Identificador \u00fanico de la factura."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "Detalle de la factura obtenido exitosamente.",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "object",
+                                        "properties": {
+                                            "items": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "userId": {
+                                                            "type": "string",
+                                                            "example": "i1",
+                                                            "description": "Identificador del usuario."
+                                                        },
+                                                        "docId": {
+                                                            "type": "string",
+                                                            "example": "20240221094139854169722",
+                                                            "description": "Identificador \u00fanico de la factura."
+                                                        },
+                                                        "bill": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "CUFE": {
+                                                                        "type": "string",
+                                                                        "example": "91a2132927d96275bc82c8a8d59b787d046672738b44409f764b9b29ce020c5990c378301d90e483ae33ef4f61ab2c22",
+                                                                        "description": "C\u00f3digo \u00fanico de factura electr\u00f3nica (CUFE)."
+                                                                    },
+                                                                    "documentInfo": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "billId": {
+                                                                                "type": "string",
+                                                                                "example": "CL-1446",
+                                                                                "description": "Identificador de la factura."
+                                                                            },
+                                                                            "typePay": {
+                                                                                "type": "string",
+                                                                                "example": "Cr\u00e9dito",
+                                                                                "description": "Tipo de pago."
+                                                                            },
+                                                                            "paymentMethod": {
+                                                                                "type": "string",
+                                                                                "example": "Transferencia Cr\u00e9dito",
+                                                                                "description": "M\u00e9todo de pago."
+                                                                            },
+                                                                            "emisionDate": {
+                                                                                "type": "string",
+                                                                                "example": "20-02-2024",
+                                                                                "description": "Fecha de emisi\u00f3n de la factura."
+                                                                            },
+                                                                            "receptionDate": {
+                                                                                "type": "string",
+                                                                                "example": "21-02-2024",
+                                                                                "description": "Fecha de recepci\u00f3n de la factura."
+                                                                            },
+                                                                            "expirationDate": {
+                                                                                "type": "string",
+                                                                                "example": "21-03-2024",
+                                                                                "description": "Fecha de expiraci\u00f3n de la factura."
+                                                                            },
+                                                                            "operationType": {
+                                                                                "type": "string",
+                                                                                "example": "12 - Transporte",
+                                                                                "description": "Tipo de operaci\u00f3n."
+                                                                            },
+                                                                            "type": {
+                                                                                "type": "string",
+                                                                                "example": "Application response",
+                                                                                "description": "Tipo de respuesta."
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "sender": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "senderNIT": {
+                                                                                "type": "string",
+                                                                                "example": "900201111",
+                                                                                "description": "NIT del emisor."
+                                                                            },
+                                                                            "sender": {
+                                                                                "type": "string",
+                                                                                "example": "Hair and Nails Ltda",
+                                                                                "description": "Nombre del emisor."
+                                                                            },
+                                                                            "countrySender": {
+                                                                                "type": "string",
+                                                                                "example": "Colombia",
+                                                                                "description": "Pa\u00eds del emisor."
+                                                                            },
+                                                                            "citySender": {
+                                                                                "type": "string",
+                                                                                "example": "BOGOT\u00c1, D.C.",
+                                                                                "description": "Ciudad del emisor."
+                                                                            },
+                                                                            "addressSender": {
+                                                                                "type": "string",
+                                                                                "example": "Cra 67 # 160-50",
+                                                                                "description": "Direcci\u00f3n del emisor."
+                                                                            },
+                                                                            "celphoneSender": {
+                                                                                "type": "string",
+                                                                                "example": "300212001001",
+                                                                                "description": "Tel\u00e9fono m\u00f3vil del emisor."
+                                                                            },
+                                                                            "emailSender": {
+                                                                                "type": "string",
+                                                                                "example": "iss.dr@hairna.com.co",
+                                                                                "description": "Correo electr\u00f3nico del emisor."
+                                                                            },
+                                                                            "taxpayerTypeSender": {
+                                                                                "type": "string",
+                                                                                "example": "Persona Jur\u00eddica",
+                                                                                "description": "Tipo de contribuyente del emisor."
+                                                                            },
+                                                                            "responsabilityTaxSender": {
+                                                                                "type": "string",
+                                                                                "example": "01 - Iva",
+                                                                                "description": "Responsabilidad tributaria del emisor."
+                                                                            },
+                                                                            "CIIU": {
+                                                                                "type": "string",
+                                                                                "example": "6201",
+                                                                                "description": "C\u00f3digo CIIU del emisor."
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "receiver": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "receiverNIT": {
+                                                                                "type": "string",
+                                                                                "example": "900201222",
+                                                                                "description": "NIT del receptor."
+                                                                            },
+                                                                            "receiver": {
+                                                                                "type": "string",
+                                                                                "example": "Bogopack Ltda",
+                                                                                "description": "Nombre del receptor."
+                                                                            },
+                                                                            "countryReceiver": {
+                                                                                "type": "string",
+                                                                                "example": "Colombia",
+                                                                                "description": "Pa\u00eds del receptor."
+                                                                            },
+                                                                            "cityReceiver": {
+                                                                                "type": "string",
+                                                                                "example": "BOGOT\u00c1, D.C.",
+                                                                                "description": "Ciudad del receptor."
+                                                                            },
+                                                                            "addressReceiver": {
+                                                                                "type": "string",
+                                                                                "example": "Cra 87 # 160-50",
+                                                                                "description": "Direcci\u00f3n del receptor."
+                                                                            },
+                                                                            "celphoneReceiver": {
+                                                                                "type": "string",
+                                                                                "example": "312212001001",
+                                                                                "description": "Tel\u00e9fono m\u00f3vil del receptor."
+                                                                            },
+                                                                            "emailReceiver": {
+                                                                                "type": "string",
+                                                                                "example": "principal@bogopack.com.co",
+                                                                                "description": "Correo electr\u00f3nico del receptor."
+                                                                            },
+                                                                            "taxpayerTypeReceiver": {
+                                                                                "type": "string",
+                                                                                "example": "Persona Jur\u00eddica",
+                                                                                "description": "Tipo de contribuyente del receptor."
+                                                                            },
+                                                                            "responsabilityTaxReceiver": {
+                                                                                "type": "string",
+                                                                                "example": "01 \u2013 Iva",
+                                                                                "description": "Responsabilidad tributaria del receptor."
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "details": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "code": {
+                                                                                "type": "string",
+                                                                                "example": "999",
+                                                                                "description": "C\u00f3digo de detalle de la factura."
+                                                                            },
+                                                                            "description": {
+                                                                                "type": "string",
+                                                                                "example": "Horas de servicio",
+                                                                                "description": "Descripci\u00f3n del detalle."
+                                                                            },
+                                                                            "taxes": {
+                                                                                "type": "number",
+                                                                                "example": 399475,
+                                                                                "description": "Impuestos asociados al detalle."
+                                                                            },
+                                                                            "totalAmount": {
+                                                                                "type": "number",
+                                                                                "example": 2501975,
+                                                                                "description": "Monto total del detalle."
+                                                                            },
+                                                                            "withholdingTax": {
+                                                                                "type": "number",
+                                                                                "example": 73587,
+                                                                                "description": "Retenci\u00f3n de impuestos."
+                                                                            },
+                                                                            "withholdingTaxIVA": {
+                                                                                "type": "number",
+                                                                                "example": 59921,
+                                                                                "description": "Retenci\u00f3n de IVA."
+                                                                            },
+                                                                            "withholdingTaxICA": {
+                                                                                "type": "number",
+                                                                                "example": 20310,
+                                                                                "description": "Retenci\u00f3n de ICA.",
+                                                                                "responses": []
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "401": {
+                                "$ref": "#/components/responses/Unauthorized"
+                            },
+                            "403": {
+                                "$ref": "#/components/responses/Forbidden"
+                            },
+                            "404": {
+                                "$ref": "#/components/responses/NotFound"
+                            },
+                            "500": {
+                                "$ref": "#/components/responses/InternalServerError"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "Unauthorized": {
+                "description": "El cliente actual no tiene relaci\u00f3n con el c\u00f3digo de usuario.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 401
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "unauthorized"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Cliente actual no tiene relaci\u00f3n con el c\u00f3digo de usuario."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe confirmar que el usuario haya realizado registro exitoso en el widget, ya que su informaci\u00f3n no se encuentra asociada al cliente."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Forbidden": {
+                "description": "El token ha caducado.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 403
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "forbidden"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "El token caduc\u00f3."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe solicitar un nuevo token por medio del servicio de autorizaci\u00f3n y volver a realizar la petici\u00f3n."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "NotFound": {
+                "description": "El producto no tiene informaci\u00f3n con el usuario a consultar.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 404
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "not found"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "El producto no tiene informaci\u00f3n con el usuario a consultar. El id producto o id usuario puede estar equivocado. La URL de la API no es correcta."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe confirmar que el usuario haya realizado registro exitoso en el widget, tambi\u00e9n validar id o documento del usuario, el id del producto a consultar o que la URL de la API se encuentra con la estructura correcta."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "InternalServerError": {
+                "description": "Error interno en la comunicaci\u00f3n con un tercero.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 500
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Error en comunicaci\u00f3n de Yoint con un tercero."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se deben comunicar inmediatamente con el equipo de soporte de Yoint."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,557 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Yoint - Informaci\u00f3n de C\u00e1mara de Comercio",
+        "description": "Consulta la informaci\u00f3n registrada en la C\u00e1mara de Comercio utilizando el tipo de identificaci\u00f3n o el n\u00famero de matr\u00edcula de la empresa. Elige el m\u00e9todo de consulta utilizando el campo `queryType`.",
+        "termsOfService": "https://yoint.co/terminos-y-condiciones/",
+        "contact": {
+            "email": "sales@yoint.co"
+        },
+        "version": "17"
+    },
+    "paths": {
+        "/users/ccbfind": {
+            "post": {
+                "tags": [
+                    "Information commerce of camara"
+                ],
+                "summary": "Informaci\u00f3n de C\u00e1mara de Comercio",
+                "description": "Consulta la informaci\u00f3n registrada en la C\u00e1mara de Comercio utilizando el tipo de identificaci\u00f3n o el n\u00famero de matr\u00edcula de la empresa. Elige el m\u00e9todo de consulta utilizando el campo `queryType`.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "queryType": {
+                                        "type": "string",
+                                        "enum": [
+                                            "identification",
+                                            "enrollment"
+                                        ],
+                                        "example": "identification",
+                                        "description": "Tipo de consulta a realizar. Puede ser `identification` o `enrollment`."
+                                    },
+                                    "typeId": {
+                                        "type": "string",
+                                        "example": "x",
+                                        "description": "(Requerido para `identification`) Tipo de identificaci\u00f3n de la empresa."
+                                    },
+                                    "numId": {
+                                        "type": "string",
+                                        "example": "1787655444",
+                                        "description": "(Requerido para `identification`) N\u00famero de identificaci\u00f3n de la empresa."
+                                    },
+                                    "idCam": {
+                                        "type": "string",
+                                        "example": "x",
+                                        "description": "(Requerido para `enrollment`) C\u00f3digo de ciudad de la C\u00e1mara de Comercio."
+                                    },
+                                    "numMat": {
+                                        "type": "string",
+                                        "example": "1787444",
+                                        "description": "(Requerido para `enrollment`) N\u00famero de matr\u00edcula de la empresa."
+                                    }
+                                },
+                                "required": [
+                                    "queryType"
+                                ],
+                                "oneOf": [
+                                    {
+                                        "properties": {
+                                            "queryType": {
+                                                "enum": [
+                                                    "identification"
+                                                ]
+                                            },
+                                            "typeId": {
+                                                "type": "string"
+                                            },
+                                            "numId": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "typeId",
+                                            "numId"
+                                        ]
+                                    },
+                                    {
+                                        "properties": {
+                                            "queryType": {
+                                                "enum": [
+                                                    "enrollment"
+                                                ]
+                                            },
+                                            "idCam": {
+                                                "type": "string"
+                                            },
+                                            "numMat": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "idCam",
+                                            "numMat"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informaci\u00f3n de la C\u00e1mara de Comercio obtenida exitosamente.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "companyDataBasic": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "razonSocial": {
+                                                            "type": "string",
+                                                            "example": "METRO S.A.S.",
+                                                            "description": "Raz\u00f3n social de la empresa."
+                                                        },
+                                                        "tipoIdentificacion": {
+                                                            "type": "string",
+                                                            "example": "2",
+                                                            "description": "Tipo de identificaci\u00f3n de la empresa."
+                                                        },
+                                                        "identificacion": {
+                                                            "type": "string",
+                                                            "example": "000009003111104",
+                                                            "description": "N\u00famero de identificaci\u00f3n de la empresa."
+                                                        },
+                                                        "matricula": {
+                                                            "type": "string",
+                                                            "example": "01900055",
+                                                            "description": "N\u00famero de matr\u00edcula de la empresa."
+                                                        },
+                                                        "fechaMatricula": {
+                                                            "type": "string",
+                                                            "example": "04/08/2001",
+                                                            "description": "Fecha de registro en la C\u00e1mara de Comercio."
+                                                        },
+                                                        "fecUltimaRenovacion": {
+                                                            "type": "string",
+                                                            "example": "14/04/2021",
+                                                            "description": "Fecha de la \u00faltima renovaci\u00f3n."
+                                                        },
+                                                        "ciiu": {
+                                                            "type": "string",
+                                                            "example": "4659",
+                                                            "description": "C\u00f3digo CIIU asociado a la empresa."
+                                                        },
+                                                        "desc_ciuu": {
+                                                            "type": "string",
+                                                            "example": "COMERCIO AL POR MAYOR DE OTROS TIPOS DE MAQUINARIA Y EQUIPO N.C.P.",
+                                                            "description": "Descripci\u00f3n del c\u00f3digo CIIU."
+                                                        },
+                                                        "direcci\u00f3n": {
+                                                            "type": "string",
+                                                            "example": "KR 12# 98 - 99 OF 500",
+                                                            "description": "Direcci\u00f3n registrada de la empresa."
+                                                        },
+                                                        "departamento": {
+                                                            "type": "string",
+                                                            "example": "BOGOT\u00c1 D.C.",
+                                                            "description": "Departamento de registro."
+                                                        },
+                                                        "municipio": {
+                                                            "type": "string",
+                                                            "example": "BOGOT\u00c1 D.C.",
+                                                            "description": "Municipio de registro."
+                                                        },
+                                                        "tel\u00e9fono": {
+                                                            "type": "string",
+                                                            "example": "8023687",
+                                                            "description": "Tel\u00e9fono de contacto de la empresa."
+                                                        },
+                                                        "email": {
+                                                            "type": "string",
+                                                            "example": "pablo@metro.com",
+                                                            "description": "Correo electr\u00f3nico registrado de la empresa."
+                                                        },
+                                                        "estadoEmbargo": {
+                                                            "type": "string",
+                                                            "example": "NO EMBARGADO",
+                                                            "description": "Estado de embargo de la empresa."
+                                                        }
+                                                    }
+                                                },
+                                                "representativeData": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "tipoId": {
+                                                            "type": "string",
+                                                            "example": "1",
+                                                            "description": "Tipo de identificaci\u00f3n del representante legal."
+                                                        },
+                                                        "numId": {
+                                                            "type": "string",
+                                                            "example": "000000052857197",
+                                                            "description": "N\u00famero de identificaci\u00f3n del representante legal."
+                                                        },
+                                                        "nombreRepre": {
+                                                            "type": "string",
+                                                            "example": "DIANA PAOLA CEDANO DIAZ",
+                                                            "description": "Nombre del representante legal."
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Solicitud mal formada o par\u00e1metros faltantes."
+                    },
+                    "500": {
+                        "description": "Error interno en el servidor."
+                    }
+                }
+            }
+        }
+    },
+    "companyFinancialData": {
+        "type": "object",
+        "properties": {
+            "activoCorriente": {
+                "type": "number",
+                "example": 2750722538,
+                "description": "Activo corriente de la empresa."
+            },
+            "activoNoCorriente": {
+                "type": "number",
+                "example": 100402800,
+                "description": "Activo no corriente de la empresa."
+            },
+            "activoNetoFijo": {
+                "type": "number",
+                "example": 0,
+                "description": "Activo neto fijo de la empresa."
+            },
+            "otrosActivos": {
+                "type": "number",
+                "example": 0,
+                "description": "Otros activos de la empresa."
+            },
+            "valoracionActivos": {
+                "type": "number",
+                "example": 0,
+                "description": "Valoraci\u00f3n de activos de la empresa."
+            },
+            "totalActivos": {
+                "type": "number",
+                "example": 2851125338,
+                "description": "Total de activos de la empresa."
+            },
+            "activosSinInfla": {
+                "type": "number",
+                "example": 2851125338,
+                "description": "Activos sin inflaci\u00f3n de la empresa."
+            },
+            "pasivoCorriente": {
+                "type": "number",
+                "example": 880951358,
+                "description": "Pasivo corriente de la empresa."
+            },
+            "pasivoNoCorriente": {
+                "type": "number",
+                "example": 857754347,
+                "description": "Pasivo no corriente de la empresa."
+            },
+            "pasivoLargoPlazo": {
+                "type": "number",
+                "example": 0,
+                "description": "Pasivo a largo plazo de la empresa."
+            },
+            "totalPasivo": {
+                "type": "number",
+                "example": 1738705705,
+                "description": "Total de pasivos de la empresa."
+            },
+            "patrimonioNeto": {
+                "type": "number",
+                "example": 1112419633,
+                "description": "Patrimonio neto de la empresa."
+            },
+            "pasivoPatrimonio": {
+                "type": "number",
+                "example": 2851125338,
+                "description": "Relaci\u00f3n entre pasivo y patrimonio."
+            },
+            "balanceSocial": {
+                "type": "number",
+                "example": 0,
+                "description": "Balance social de la empresa."
+            },
+            "ingresoActOrdi": {
+                "type": "number",
+                "example": 4589103240,
+                "description": "Ingresos por actividades ordinarias."
+            },
+            "otrosIngresos": {
+                "type": "number",
+                "example": 102106159,
+                "description": "Otros ingresos registrados."
+            },
+            "costosVentas": {
+                "type": "number",
+                "example": 2890195536,
+                "description": "Costos relacionados con las ventas."
+            },
+            "gastosOperacionales": {
+                "type": "number",
+                "example": 1133424839,
+                "description": "Gastos operacionales de la empresa."
+            },
+            "otrosGastos": {
+                "type": "number",
+                "example": 436260607,
+                "description": "Otros gastos incurridos."
+            },
+            "gastosPorImp": {
+                "type": "number",
+                "example": 124869000,
+                "description": "Gastos relacionados con impuestos."
+            },
+            "gastosAdmon": {
+                "type": "number",
+                "example": 0,
+                "description": "Gastos de administraci\u00f3n de la empresa."
+            },
+            "utilidadOperacional": {
+                "type": "number",
+                "example": 565482865,
+                "description": "Utilidad operacional generada."
+            },
+            "utilidadNeta": {
+                "type": "number",
+                "example": 106459417,
+                "description": "Utilidad neta de la empresa."
+            },
+            "activosVinculados": {
+                "type": "number",
+                "example": 2851125338,
+                "description": "Activos vinculados a la empresa."
+            },
+            "capitalNeto": {
+                "type": "number",
+                "example": 1869771180,
+                "description": "Capital neto de la empresa."
+            },
+            "leverageoCapacidad": {
+                "type": "number",
+                "example": 0,
+                "description": "\u00cdndice de apalancamiento o capacidad."
+            },
+            "margenUtilidad": {
+                "type": "number",
+                "example": 0,
+                "description": "Margen de utilidad de la empresa."
+            },
+            "nivelEndeudamiento": {
+                "type": "number",
+                "example": 0,
+                "description": "Nivel de endeudamiento de la empresa."
+            },
+            "productividad": {
+                "type": "number",
+                "example": 0,
+                "description": "\u00cdndice de productividad."
+            },
+            "razonCorriente": {
+                "type": "number",
+                "example": 0,
+                "description": "Raz\u00f3n corriente de la empresa."
+            },
+            "rotacionActivoTotal": {
+                "type": "number",
+                "example": 0,
+                "description": "Rotaci\u00f3n total de activos."
+            },
+            "liquidez": {
+                "type": "number",
+                "example": 4.61,
+                "description": "\u00cdndice de liquidez de la empresa."
+            },
+            "endeudamiento": {
+                "type": "number",
+                "example": 0.58,
+                "description": "Relaci\u00f3n de endeudamiento."
+            },
+            "cobertura": {
+                "type": "number",
+                "example": 4.14,
+                "description": "Cobertura financiera."
+            }
+        }
+    },
+    "companyDataCertifies": {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "idCertifica": {
+                    "type": "string",
+                    "example": 1110,
+                    "description": "Identificador del certificado."
+                },
+                "nomCertifica": {
+                    "type": "string",
+                    "example": "REPRESENTACION LEGAL",
+                    "description": "Nombre del certificado."
+                },
+                "certificado": {
+                    "type": "string",
+                    "example": "Representaci\u00f3n Legal: La administraci\u00f3n inmediata de la sociedad, \nsu representaci\u00f3n legal y la gesti\u00f3n de los negocios sociales, estar\u00e1n \na cargo de un gerente general y del subgerente.\n",
+                    "description": "Detalles del certificado."
+                }
+            }
+        }
+    },
+    "401": {
+        "$ref": "#/components/responses/Unauthorized"
+    },
+    "403": {
+        "$ref": "#/components/responses/Forbidden"
+    },
+    "404": {
+        "$ref": "#/components/responses/NotFound"
+    },
+    "500": {
+        "$ref": "#/components/responses/InternalServerError"
+    },
+    "components": {
+        "responses": {
+            "Unauthorized": {
+                "description": "El cliente actual no tiene relaci\u00f3n con el c\u00f3digo de usuario.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 401
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "unauthorized"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Cliente actual no tiene relaci\u00f3n con el c\u00f3digo de usuario."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe confirmar que el usuario haya realizado registro exitoso en el widget, ya que su informaci\u00f3n no se encuentra asociada al cliente."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Forbidden": {
+                "description": "El token ha caducado.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 403
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "forbidden"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "El token caduc\u00f3."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe solicitar un nuevo token por medio del servicio de autorizaci\u00f3n y volver a realizar la petici\u00f3n."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "NotFound": {
+                "description": "El producto no tiene informaci\u00f3n con el usuario a consultar.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 404
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "not found"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "El producto no tiene informaci\u00f3n con el usuario a consultar. El id producto o id usuario puede estar equivocado. La URL de la API no es correcta."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe confirmar que el usuario haya realizado registro exitoso en el widget, tambi\u00e9n validar id o documento del usuario, el id del producto a consultar o que la URL de la API se encuentra con la estructura correcta."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "InternalServerError": {
+                "description": "Error interno en la comunicaci\u00f3n con un tercero.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 500
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Error en comunicaci\u00f3n de Yoint con un tercero."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se deben comunicar inmediatamente con el equipo de soporte de Yoint."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

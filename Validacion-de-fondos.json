@@ -1,0 +1,66 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Yoint - Validaci\u00f3n de fondos",
+        "description": "Valida que una cuenta de ahorro o corriente tiene los fondos necesarios seg\u00fan lo indicado por el usuario.",
+        "termsOfService": "https://yoint.co/terminos-y-condiciones/",
+        "contact": {
+            "email": "sales@yoint.co"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://api.yoint.co",
+            "description": "Servidor de producci\u00f3n"
+        }
+    ],
+    "paths": {
+        "/users/fund-validation": {
+            "post": {
+                "tags": [
+                    "Validation founds"
+                ],
+                "summary": "Validaci\u00f3n de fondos",
+                "description": "Valida que una cuenta de ahorro o corriente tiene los fondos necesarios seg\u00fan lo indicado por el usuario.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "accountId": {
+                                        "type": "string",
+                                        "example": "987654321",
+                                        "description": "Identificador \u00fanico de la cuenta."
+                                    },
+                                    "requiredAmount": {
+                                        "type": "number",
+                                        "example": 500000,
+                                        "description": "Monto requerido para la validaci\u00f3n."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Fondos validados exitosamente.",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Operaci\u00f3n exitosa"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Cuenta no encontrada o fondos insuficientes."
+                    }
+                }
+            }
+        }
+    }
+}

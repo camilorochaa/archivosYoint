@@ -1,0 +1,66 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Yoint - presupuestos proyectados",
+        "description": "Proyecta presupuestos de un usuario teniendo en cuenta los productos de ahorro y cr\u00e9dito junto con sus movimientos hist\u00f3ricos.",
+        "termsOfService": "https://yoint.co/terminos-y-condiciones/",
+        "contact": {
+            "email": "sales@yoint.co"
+        }
+    },
+    "paths": {
+        "/users/budgets": {
+            "post": {
+                "tags": [
+                    "projected sumary"
+                ],
+                "summary": "Presupuestos proyectados",
+                "description": "Proyecta presupuestos de un usuario teniendo en cuenta los productos de ahorro y cr\u00e9dito junto con sus movimientos hist\u00f3ricos.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "userId": {
+                                        "type": "string",
+                                        "example": "56789123",
+                                        "description": "Identificador \u00fanico del usuario."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Proyecci\u00f3n de presupuestos obtenida exitosamente.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "projectedSavings": {
+                                            "type": "number",
+                                            "example": 500000,
+                                            "description": "Ahorros proyectados."
+                                        },
+                                        "projectedDebts": {
+                                            "type": "number",
+                                            "example": 300000,
+                                            "description": "Deudas proyectadas."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuario no encontrado."
+                    }
+                }
+            }
+        }
+    }
+}

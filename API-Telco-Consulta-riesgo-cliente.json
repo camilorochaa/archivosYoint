@@ -1,0 +1,214 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Yoint - API Telco Score - Consulta Riesgo Cliente",
+        "description": "Permite realizar validaciones de riesgo de un cliente seg\u00fan la informaci\u00f3n registrada en Telcos.",
+        "termsOfService": "https://yoint.co/terminos-y-condiciones/",
+        "contact": {
+            "email": "sales@yoint.co"
+        },
+        "version": "17"
+    },
+    "paths": {
+        "/users/risktelco": {
+            "post": {
+                "tags": [
+                    "Consult Riesgo Client TELCO SCORE"
+                ],
+                "summary": "API Telco Score \u2013 Consulta de Riesgo Cliente",
+                "description": "Permite realizar validaciones de riesgo de un cliente seg\u00fan la informaci\u00f3n registrada en Telcos.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "numeroLinea": {
+                                        "type": "string",
+                                        "example": "3009998877",
+                                        "description": "N\u00famero de l\u00ednea del usuario."
+                                    },
+                                    "operacion": {
+                                        "type": "integer",
+                                        "example": 1,
+                                        "description": "Tipo de operaci\u00f3n a realizar (ver descripci\u00f3n completa en la documentaci\u00f3n)."
+                                    },
+                                    "authorization": {
+                                        "type": "boolean",
+                                        "example": true,
+                                        "description": "Indicador de autorizaci\u00f3n para consultar."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Consulta de riesgo obtenida exitosamente.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "resultadoConsulta": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        },
+                                        "mensajeRespuesta": {
+                                            "type": "string",
+                                            "example": "Mensaje procesado exitosamente"
+                                        },
+                                        "transactionId": {
+                                            "type": "string",
+                                            "example": "ad46e38dc0864f3d"
+                                        },
+                                        "respuesta": {
+                                            "type": "string",
+                                            "example": "SI"
+                                        },
+                                        "fecha": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2020-06-13"
+                                        },
+                                        "causal": {
+                                            "type": "string",
+                                            "example": "Otras Causales",
+                                            "description": "Causal en caso de suspensi\u00f3n o desactivaci\u00f3n (solo aplica para algunas operaciones)."
+                                        },
+                                        "tipo": {
+                                            "type": "string",
+                                            "example": "IN",
+                                            "description": "Tipo de portaci\u00f3n (solo aplica para la operaci\u00f3n 04)."
+                                        },
+                                        "tipoRango": {
+                                            "type": "string",
+                                            "example": "1",
+                                            "description": "Rango de llamadas entrantes o salientes (solo aplica para las operaciones 08 y 09)."
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "cambioSIM": {
+                                        "summary": "Cambio de SIM",
+                                        "value": {
+                                            "resultadoConsulta": "OK",
+                                            "mensajeRespuesta": "Mensaje procesado exitosamente",
+                                            "transactionId": "ad46e38dc0864f3d",
+                                            "respuesta": "SI",
+                                            "fecha": "2020-06-13"
+                                        }
+                                    },
+                                    "suspendidaDesactivada": {
+                                        "summary": "Suspendida o desactivada",
+                                        "value": {
+                                            "resultadoConsulta": "OK",
+                                            "mensajeRespuesta": "Mensaje procesado exitosamente",
+                                            "transactionId": "ad46e38dc0864f3d",
+                                            "respuesta": "SI",
+                                            "causal": "Otras Causales",
+                                            "fecha": "2020-06-13"
+                                        }
+                                    },
+                                    "portacion": {
+                                        "summary": "Portaci\u00f3n",
+                                        "value": {
+                                            "resultadoConsulta": "OK",
+                                            "mensajeRespuesta": "Mensaje procesado exitosamente",
+                                            "transactionId": "ad46e38dc0864f3d",
+                                            "respuesta": "SI",
+                                            "tipo": "IN",
+                                            "fecha": "2020-06-13"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "No autorizado. El usuario no tiene acceso a esta informaci\u00f3n.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "El usuario no tiene autorizaci\u00f3n para esta acci\u00f3n."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido. Acceso denegado al recurso.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Forbidden"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Acceso denegado al recurso."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "NotFound"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "El recurso solicitado no fue encontrado."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "InternalServerError"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Se produjo un error interno en el servidor."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

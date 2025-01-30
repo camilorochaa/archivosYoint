@@ -1,0 +1,408 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Yoint - Consulta de retenci\u00f3n en la fuente",
+        "description": "Obt\u00e9n la informaci\u00f3n que contiene el documento de declaraci\u00f3n de retenci\u00f3n en la fuente tipo persona jur\u00eddica.",
+        "termsOfService": "https://yoint.co/terminos-y-condiciones/",
+        "contact": {
+            "email": "sales@yoint.co"
+        },
+        "version": "17"
+    },
+    "paths": {
+        "/users/dian/statement-withholding": {
+            "post": {
+                "tags": [
+                    "Consult source retention"
+                ],
+                "summary": "Consulta de retenci\u00f3n en la fuente",
+                "description": "Obt\u00e9n la informaci\u00f3n que contiene el documento de declaraci\u00f3n de retenci\u00f3n en la fuente tipo persona jur\u00eddica, cada campo representa el n\u00famero correspondiente al formulario de la DIAN.",
+                "parameters": [
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "userId": {
+                                        "type": "string",
+                                        "example": "i1",
+                                        "description": "Identificador \u00fanico del usuario."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informaci\u00f3n de retenci\u00f3n en la fuente obtenida exitosamente.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "F350": {
+                                            "type": "object",
+                                            "properties": {
+                                                "f1_A\u00d1O": {
+                                                    "type": "string",
+                                                    "example": "2021",
+                                                    "description": "A\u00f1o de la declaraci\u00f3n."
+                                                },
+                                                "f3_PERIODO": {
+                                                    "type": "integer",
+                                                    "example": 10,
+                                                    "description": "Periodo de la declaraci\u00f3n."
+                                                },
+                                                "f4_N_FORMULARIO": {
+                                                    "type": "string",
+                                                    "example": "3000000000004",
+                                                    "description": "N\u00famero de formulario de la declaraci\u00f3n."
+                                                },
+                                                "f5_NIT": {
+                                                    "type": "string",
+                                                    "example": "900000001",
+                                                    "description": "N\u00famero de Identificaci\u00f3n Tributaria."
+                                                },
+                                                "f6_DV": {
+                                                    "type": "string",
+                                                    "example": "2",
+                                                    "description": "D\u00edgito verificador del NIT."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "f60_RETE_RENT_DIV_PARTICIPACIONES": {
+        "type": "integer",
+        "example": 0,
+        "description": "Retenci\u00f3n por dividendos o participaciones."
+    },
+    "f61_RETE_RENT_COMPRAS": {
+        "type": "integer",
+        "example": 0,
+        "description": "Retenci\u00f3n por compras."
+    },
+    "f62_RETE_RENT_TRAN_TAR_DEB_CRE": {
+        "type": "integer",
+        "example": 0,
+        "description": "Retenci\u00f3n por transferencias con tarjeta de cr\u00e9dito."
+    },
+    "f63_RETE_RENT_CONTR_CONSTR": {
+        "type": "integer",
+        "example": 0,
+        "description": "Retenci\u00f3n por contratos de construcci\u00f3n."
+    },
+    "f64_RETE_RENT_ENA_ACT_FIJ_PER_NAT": {
+        "type": "integer",
+        "example": 0,
+        "description": "Retenci\u00f3n por enajenaci\u00f3n de activos fijos de personas naturales."
+    },
+    "f65_RETE_LOT_RIFAS_APUE_SIMIL": {
+        "type": "integer",
+        "example": 0,
+        "description": "Retenci\u00f3n por loter\u00edas, rifas o apuestas similares."
+    },
+    "f66_RETE_OTROS_PAGOS_SUJ_RET": {
+        "type": "integer",
+        "example": 0,
+        "description": "Retenci\u00f3n por otros pagos sujetos a retenci\u00f3n."
+    },
+    "f67_RETE_AUTOR_CONTR_EXO": {
+        "type": "integer",
+        "example": 0,
+        "description": "Autorizaci\u00f3n de retenci\u00f3n por contratos exentos."
+    },
+    "f68_RETE_AUTOR_VENTAS": {
+        "type": "integer",
+        "example": 0,
+        "description": "Autorizaci\u00f3n de retenci\u00f3n por ventas."
+    },
+    "f69_RETE_AUTOR_HONORARIOS": {
+        "type": "integer",
+        "example": 0,
+        "description": "Autorizaci\u00f3n de retenci\u00f3n por honorarios."
+    },
+    "f70_RETE_AUTOR_COMISIONES": {
+        "type": "integer",
+        "example": 0,
+        "description": "Autorizaci\u00f3n de retenci\u00f3n por comisiones."
+    },
+    "f71_RETE_AUTOR_SERVICIOS": {
+        "type": "integer",
+        "example": 0,
+        "description": "Autorizaci\u00f3n de retenci\u00f3n por servicios."
+    },
+    "f72_RETE_AUTOR_REND_FIN": {
+        "type": "integer",
+        "example": 0,
+        "description": "Autorizaci\u00f3n de retenci\u00f3n por rendimientos financieros."
+    },
+    "f73_RETE_AUTOR_PAG_MEN_PROV_VOL": {
+        "type": "integer",
+        "example": 0,
+        "description": "Autorizaci\u00f3n de retenci\u00f3n por pagos mensuales provisionales."
+    },
+    "f74_RETE_AUTOR_OTROS_CONCEPTOS": {
+        "type": "integer",
+        "example": 0,
+        "description": "Autorizaci\u00f3n de retenci\u00f3n por otros conceptos."
+    },
+    "f75_RETE_PAG_CUE_EXT_PAIS_SIN_CONV": {
+        "type": "integer",
+        "example": 0,
+        "description": "Retenci\u00f3n por pagos a cuentas en el exterior sin convenio."
+    },
+    "f76_RETE_PAG_CUE_EXT_PAIS_CON_CONV": {
+        "type": "integer",
+        "example": 0,
+        "description": "Retenci\u00f3n por pagos a cuentas en el exterior con convenio."
+    },
+    "f77_RETE_MENOS_RETE_EXE_IND_OPER_ANUL": {
+        "type": "integer",
+        "example": 0,
+        "description": "Retenci\u00f3n menos retenci\u00f3n exenta por operaciones anuladas."
+    },
+    "f78_RETE_TOTAL_RETE_COMPL": {
+        "type": "integer",
+        "example": 324000,
+        "description": "Total de retenciones completas."
+    },
+    "f79_TIT_IVA_RES_IMP_VENTAS": {
+        "type": "integer",
+        "example": 0,
+        "description": "Retenci\u00f3n de IVA por ventas."
+    },
+    "f80_TIT_IVA_PRAC_SER_NO_RES_NO_DOM": {
+        "type": "integer",
+        "example": 0,
+        "description": "Retenci\u00f3n de IVA por servicios no residentes ni domiciliados."
+    },
+    "f81_TIT_IVA_MONT_RETE_OPER_ANUL": {
+        "type": "integer",
+        "example": 0,
+        "description": "Monto de retenci\u00f3n de IVA por operaciones anuladas."
+    },
+    "f82_TIT_IVA_TOTAL_RETE_IVA": {
+        "type": "integer",
+        "example": 0,
+        "description": "Total de retenciones de IVA."
+    },
+    "f83_RETE_IMP_TIMBRE_NAC": {
+        "type": "integer",
+        "example": 0,
+        "description": "Retenci\u00f3n de timbre nacional."
+    },
+    "f84_RET_CONT_LAUDOS_ARB": {
+        "type": "integer",
+        "example": 0,
+        "description": "Retenci\u00f3n por laudos arbitrales."
+    },
+    "f85_TOTAL_RETENCIONES": {
+        "type": "integer",
+        "example": 324000,
+        "description": "Total de retenciones."
+    },
+    "f86_TOTAL_SANCIONES": {
+        "type": "integer",
+        "example": 380000,
+        "description": "Total de sanciones."
+    },
+    "f87_TOTAL_RETE_SANCIONES": {
+        "type": "integer",
+        "example": 704000,
+        "description": "Total de retenciones m\u00e1s sanciones."
+    },
+    "f88_N_ID_SIGNATARIO": {
+        "type": "string",
+        "example": "value",
+        "description": "Identificaci\u00f3n del firmante."
+    },
+    "f89_DV": {
+        "type": "string",
+        "example": "value",
+        "description": "D\u00edgito verificador del firmante."
+    },
+    "f980_PAGO_TOTAL": {
+        "type": "integer",
+        "example": 0,
+        "description": "Pago total."
+    },
+    "f981_COD_REPRESENTACION": {
+        "type": "string",
+        "example": "value",
+        "description": "C\u00f3digo de representaci\u00f3n del firmante."
+    },
+    "f982_COD_CONTADOR": {
+        "type": "string",
+        "example": "value",
+        "description": "C\u00f3digo del contador."
+    },
+    "f983_N_TARJETA_PROF": {
+        "type": "string",
+        "example": "20223893489673",
+        "description": "N\u00famero de tarjeta profesional del contador."
+    },
+    "f994_SALVEDADES": {
+        "type": "string",
+        "example": "value",
+        "description": "Salvedades del documento de declaraci\u00f3n."
+    },
+    "f996_N_INT_DIAN": {
+        "type": "string",
+        "example": "91000870583849",
+        "description": "N\u00famero de identificaci\u00f3n de la DIAN."
+    },
+    "f997_SELLO": {
+        "type": "string",
+        "example": "2022-02-04/09:12:39",
+        "description": "Sello del documento."
+    },
+    "401": {
+        "$ref": "#/components/responses/Unauthorized"
+    },
+    "403": {
+        "$ref": "#/components/responses/Forbidden"
+    },
+    "404": {
+        "$ref": "#/components/responses/NotFound"
+    },
+    "500": {
+        "$ref": "#/components/responses/InternalServerError"
+    },
+    "components": {
+        "responses": {
+            "Unauthorized": {
+                "description": "El cliente actual no tiene relaci\u00f3n con el c\u00f3digo de usuario.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 401
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "unauthorized"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Cliente actual no tiene relaci\u00f3n con el c\u00f3digo de usuario."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe confirmar que el usuario haya realizado registro exitoso en el widget, ya que su informaci\u00f3n no se encuentra asociada al cliente."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Forbidden": {
+                "description": "El token ha caducado.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 403
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "forbidden"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "El token caduc\u00f3."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe solicitar un nuevo token por medio del servicio de autorizaci\u00f3n y volver a realizar la petici\u00f3n."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "NotFound": {
+                "description": "El producto no tiene informaci\u00f3n con el usuario a consultar.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 404
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "not found"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "El producto no tiene informaci\u00f3n con el usuario a consultar. El id producto o id usuario puede estar equivocado. La URL de la API no es correcta."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe confirmar que el usuario haya realizado registro exitoso en el widget, tambi\u00e9n validar id o documento del usuario, el id del producto a consultar o que la URL de la API se encuentra con la estructura correcta."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "InternalServerError": {
+                "description": "Error interno en la comunicaci\u00f3n con un tercero.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 500
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Error en comunicaci\u00f3n de Yoint con un tercero."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se deben comunicar inmediatamente con el equipo de soporte de Yoint."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

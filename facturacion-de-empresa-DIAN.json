@@ -1,0 +1,260 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Yoint - Consulta facturaci\u00f3n de la empresa",
+        "description": "Obt\u00e9n la informaci\u00f3n de la facturaci\u00f3n emitida y recibida por la empresa.",
+        "termsOfService": "https://yoint.co/terminos-y-condiciones/",
+        "contact": {
+            "email": "sales@yoint.co"
+        },
+        "version": "17"
+    },
+    "paths": {
+        "/users/dian/billscompany": {
+            "post": {
+                "tags": [
+                    "DIAN facturation"
+                ],
+                "summary": "Consulta de facturaci\u00f3n de empresa",
+                "description": "Obt\u00e9n la informaci\u00f3n de la facturaci\u00f3n emitida y recibida de una empresa.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "userId": {
+                                        "type": "string",
+                                        "example": "i1",
+                                        "description": "Identificador \u00fanico del usuario."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informaci\u00f3n de facturaci\u00f3n obtenida exitosamente.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "CUFE": {
+                                                        "type": "string",
+                                                        "example": "550b4b1a46d781cad3e97ab30a3d1469772b0698f8d7d8ecafd6623fffeea653f54d0c29166a6351749a429b4e00f494",
+                                                        "description": "C\u00f3digo \u00fanico de factura electr\u00f3nica (CUFE)."
+                                                    },
+                                                    "docId": {
+                                                        "type": "string",
+                                                        "example": "20240221094139854169722",
+                                                        "description": "Identificador del documento."
+                                                    },
+                                                    "prefix": {
+                                                        "type": "string",
+                                                        "example": "CL",
+                                                        "description": "Prefijo del documento."
+                                                    },
+                                                    "emisionDate": {
+                                                        "type": "string",
+                                                        "example": "20-02-2024",
+                                                        "description": "Fecha de emisi\u00f3n de la factura."
+                                                    },
+                                                    "receptionDate": {
+                                                        "type": "string",
+                                                        "example": "21-02-2024",
+                                                        "description": "Fecha de recepci\u00f3n de la factura."
+                                                    },
+                                                    "senderNIT": {
+                                                        "type": "string",
+                                                        "example": "900201111",
+                                                        "description": "NIT del emisor."
+                                                    },
+                                                    "sender": {
+                                                        "type": "string",
+                                                        "example": "Hair and Nails Ltda",
+                                                        "description": "Nombre del emisor."
+                                                    },
+                                                    "receiverNIT": {
+                                                        "type": "string",
+                                                        "example": "900201222",
+                                                        "description": "NIT del receptor."
+                                                    },
+                                                    "receiver": {
+                                                        "type": "string",
+                                                        "example": "Bogopack Ltda",
+                                                        "description": "Nombre del receptor."
+                                                    },
+                                                    "withholdingTaxIVA": {
+                                                        "type": "integer",
+                                                        "example": 4392800,
+                                                        "description": "Retenci\u00f3n en la fuente IVA."
+                                                    },
+                                                    "withholdingTaxICA": {
+                                                        "type": "integer",
+                                                        "example": 0,
+                                                        "description": "Retenci\u00f3n en la fuente ICA."
+                                                    },
+                                                    "withholdingTaxIPC": {
+                                                        "type": "integer",
+                                                        "example": 0,
+                                                        "description": "Retenci\u00f3n en la fuente IPC."
+                                                    },
+                                                    "totalAmount": {
+                                                        "type": "integer",
+                                                        "example": 27512800,
+                                                        "description": "Monto total de la factura."
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "Aprobado con notificaci\u00f3n",
+                                                        "description": "Estado de la factura."
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "Unauthorized": {
+                "description": "El cliente actual no tiene relaci\u00f3n con el c\u00f3digo de usuario.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 401
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "unauthorized"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Cliente actual no tiene relaci\u00f3n con el c\u00f3digo de usuario."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe confirmar que el usuario haya realizado registro exitoso en el widget, ya que su informaci\u00f3n no se encuentra asociada al cliente."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Forbidden": {
+                "description": "El token ha caducado.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 403
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "forbidden"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "El token caduc\u00f3."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe solicitar un nuevo token por medio del servicio de autorizaci\u00f3n y volver a realizar la petici\u00f3n."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "NotFound": {
+                "description": "El producto no tiene informaci\u00f3n con el usuario a consultar.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 404
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "not found"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "El producto no tiene informaci\u00f3n con el usuario a consultar. El id producto o id usuario puede estar equivocado. La URL de la API no es correcta."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe confirmar que el usuario haya realizado registro exitoso en el widget, tambi\u00e9n validar id o documento del usuario, el id del producto a consultar o que la URL de la API se encuentra con la estructura correcta."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "InternalServerError": {
+                "description": "Error interno en la comunicaci\u00f3n con un tercero.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 500
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Error en comunicaci\u00f3n de Yoint con un tercero."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se deben comunicar inmediatamente con el equipo de soporte de Yoint."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

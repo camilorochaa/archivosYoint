@@ -1,0 +1,252 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Yoint - Movimiento de cuentas por banco",
+        "description": "Obt\u00e9n los movimientos de cuentas de ahorro o corrientes.",
+        "termsOfService": "https://yoint.co/terminos-y-condiciones/",
+        "contact": {
+            "email": "sales@yoint.co"
+        },
+        "version": "17"
+    },
+    "paths": {
+        "/users/accounts-movements": {
+            "post": {
+                "summary": "Movimientos de cuentas por banco",
+                "description": "Obt\u00e9n los movimientos de cuentas de ahorro o corrientes.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "userId": {
+                                        "type": "string",
+                                        "example": "i1",
+                                        "description": "Identificador del usuario."
+                                    },
+                                    "accountId": {
+                                        "type": "string",
+                                        "example": "270899461",
+                                        "description": "Identificador de la cuenta."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Movimientos obtenidos exitosamente.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "bank": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 3,
+                                                    "description": "Identificador del banco."
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "BBVA",
+                                                    "description": "Nombre del banco."
+                                                },
+                                                "code": {
+                                                    "type": "string",
+                                                    "example": "0013",
+                                                    "description": "C\u00f3digo del banco."
+                                                }
+                                            }
+                                        },
+                                        "account": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "4c8f220ba575c250455d69722867f14e2",
+                                                    "description": "Identificador \u00fanico de la cuenta."
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "nullable": true,
+                                                    "example": null,
+                                                    "description": "Nombre de la cuenta, si aplica."
+                                                },
+                                                "number": {
+                                                    "type": "string",
+                                                    "example": "0013035000000000002",
+                                                    "description": "N\u00famero de la cuenta."
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "SAVING",
+                                                    "description": "Tipo de cuenta (e.g., SAVING para cuentas de ahorro)."
+                                                },
+                                                "balance": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "pending": {
+                                                            "type": "number",
+                                                            "example": 0,
+                                                            "description": "Saldo pendiente en la cuenta."
+                                                        },
+                                                        "available": {
+                                                            "type": "number",
+                                                            "example": 0,
+                                                            "description": "Saldo disponible en la cuenta."
+                                                        },
+                                                        "pocket": {
+                                                            "type": "number",
+                                                            "nullable": true,
+                                                            "example": null,
+                                                            "description": "Saldo asociado al bolsillo de la cuenta, si aplica."
+                                                        },
+                                                        "total": {
+                                                            "type": "number",
+                                                            "example": 0,
+                                                            "description": "Total de la cuenta."
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "movements": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "operationDate": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2021-11-05T05:00:00.000+00:00",
+                                                        "description": "Fecha de la operaci\u00f3n."
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "TRANSF PROPIO BANCO BMOVI",
+                                                        "description": "Descripci\u00f3n de la operaci\u00f3n."
+                                                    },
+                                                    "amount": {
+                                                        "type": "number",
+                                                        "example": -276920,
+                                                        "description": "Monto de la operaci\u00f3n."
+                                                    },
+                                                    "category": {
+                                                        "type": "string",
+                                                        "nullable": true,
+                                                        "example": null,
+                                                        "description": "Categor\u00eda de la operaci\u00f3n, si aplica."
+                                                    }
+                                                },
+                                                "example": [
+                                                    {
+                                                        "operationDate": "2021-11-05T05:00:00.000+00:00",
+                                                        "description": "TRANSF PROPIO BANCO BMOVI",
+                                                        "amount": -276920,
+                                                        "category": null
+                                                    },
+                                                    {
+                                                        "operationDate": "2021-11-04T05:00:00.000+00:00",
+                                                        "description": "ARRENDAMIENTOS A003210069, ABONO DOMICILI",
+                                                        "amount": 276920,
+                                                        "category": null
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "Unauthorized": {
+                "description": "La solicitud no est\u00e1 autenticada.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Unauthorized"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Forbidden": {
+                "description": "El usuario no tiene permisos para realizar esta acci\u00f3n.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Forbidden"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "NotFound": {
+                "description": "El recurso solicitado no fue encontrado.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Not Found"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "InternalServerError": {
+                "description": "Ocurri\u00f3 un error interno en el servidor.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

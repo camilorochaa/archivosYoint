@@ -1,0 +1,374 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Yoint - Informacion de empleadores",
+        "description": "Obt\u00e9n informaci\u00f3n de personas jur\u00eddicas con respecto al pago de parafiscales y pago de n\u00f3mina de sus empleados.",
+        "termsOfService": "https://yoint.co/terminos-y-condiciones/",
+        "contact": {
+            "email": "sales@yoint.co"
+        },
+        "version": "17"
+    },
+    "paths": {
+        "/users/employer": {
+            "post": {
+                "tags": [
+                    "Informacion company Security"
+                ],
+                "summary": "Informaci\u00f3n de empleadores",
+                "description": "Consulta la informaci\u00f3n de las personas jur\u00eddicas con respecto al pago de n\u00f3mina y parafiscales de sus empleados. Para hacer uso de este servicio se requiere que los usuarios autoricen la consulta, esta autorizaci\u00f3n queda a cargo del cliente de Yoint que haga uso del servicio.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "tipo_identificacion_id": {
+                                        "type": "integer",
+                                        "example": 1,
+                                        "description": "Tipo de identificaci\u00f3n del empleador."
+                                    },
+                                    "numeroEmpleado_id": {
+                                        "type": "string",
+                                        "example": 123456,
+                                        "description": "N\u00famero de identificaci\u00f3n del empleador."
+                                    },
+                                    "producto_id": {
+                                        "type": "integer",
+                                        "example": 13,
+                                        "description": "Identificador del producto (13 para persona jur\u00eddica)."
+                                    },
+                                    "authorizationData": {
+                                        "type": "boolean",
+                                        "example": true,
+                                        "description": "Indicador de autorizaci\u00f3n para realizar la consulta."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informaci\u00f3n de empleadores obtenida exitosamente.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "fecha": {
+                                            "type": "string",
+                                            "example": "2020/03/31 9:17:45 AM",
+                                            "description": "Fecha en la que se consult\u00f3 la informaci\u00f3n."
+                                        },
+                                        "consulta_id": {
+                                            "type": "integer",
+                                            "example": 10000001,
+                                            "description": "ID de la consulta."
+                                        },
+                                        "respuesta_id": {
+                                            "type": "integer",
+                                            "example": 4,
+                                            "description": "ID de la respuesta."
+                                        },
+                                        "tipo_identificacion_persona_juridica_id": {
+                                            "type": "integer",
+                                            "example": 3,
+                                            "description": "Tipo de identificaci\u00f3n de la persona jur\u00eddica."
+                                        },
+                                        "numero_identificacion_persona_juridica": {
+                                            "type": "string",
+                                            "example": "123",
+                                            "description": "N\u00famero de identificaci\u00f3n de la persona jur\u00eddica."
+                                        },
+                                        "razon_social": {
+                                            "type": "string",
+                                            "example": "ABC",
+                                            "description": "Raz\u00f3n social de la empresa."
+                                        },
+                                        "CIIU": {
+                                            "type": "integer",
+                                            "example": 3311,
+                                            "description": "C\u00f3digo CIIU de la actividad econ\u00f3mica."
+                                        },
+                                        "nombre_actividad": {
+                                            "type": "string",
+                                            "example": "Mantenimiento y reparaci\u00f3n especializado de productos elaborados en metal.",
+                                            "description": "Nombre de la actividad econ\u00f3mica."
+                                        },
+                                        "clase_aportante": {
+                                            "type": "string",
+                                            "example": "Aportante con menos de 200 cotizantes",
+                                            "description": "Clase de aportante seg\u00fan n\u00famero de cotizantes."
+                                        },
+                                        "tipo_aportante": {
+                                            "type": "string",
+                                            "example": "Empleador",
+                                            "description": "Tipo de aportante."
+                                        },
+                                        "nivel_riesgo": {
+                                            "type": "string",
+                                            "example": "Medio",
+                                            "description": "Nivel de riesgo del empleador."
+                                        },
+                                        "dias_desde_vencimiento": {
+                                            "type": "string",
+                                            "example": "<=30",
+                                            "description": "D\u00edas desde el vencimiento del pago."
+                                        },
+                                        "mediana": {
+                                            "type": "number",
+                                            "example": 22729328,
+                                            "description": "Mediana de los pagos de n\u00f3mina."
+                                        },
+                                        "promedio": {
+                                            "type": "number",
+                                            "example": 26850868,
+                                            "description": "Promedio de pagos de n\u00f3mina."
+                                        },
+                                        "maximo": {
+                                            "type": "number",
+                                            "example": 62639288,
+                                            "description": "M\u00e1ximo de pagos de n\u00f3mina."
+                                        },
+                                        "minimo": {
+                                            "type": "number",
+                                            "example": 17832000,
+                                            "description": "M\u00ednimo de pagos de n\u00f3mina."
+                                        },
+                                        "tendencia": {
+                                            "type": "string",
+                                            "example": "Decreciente",
+                                            "description": "Tendencia de los pagos de n\u00f3mina."
+                                        },
+                                        "desvest": {
+                                            "type": "number",
+                                            "example": 11968480,
+                                            "description": "Desviaci\u00f3n est\u00e1ndar de los pagos de n\u00f3mina."
+                                        },
+                                        "variacion_ultimos_dos_meses": {
+                                            "type": "integer",
+                                            "example": 12,
+                                            "description": "Variaci\u00f3n de los pagos de n\u00f3mina en los \u00faltimos dos meses."
+                                        },
+                                        "ultimo_promedio_movil": {
+                                            "type": "number",
+                                            "example": 1513704,
+                                            "description": "\u00daltimo promedio m\u00f3vil de los pagos de n\u00f3mina."
+                                        },
+                                        "pendiente_salario_promedio": {
+                                            "type": "number",
+                                            "example": -95884,
+                                            "description": "Pendiente de salario promedio."
+                                        },
+                                        "pagos_nomina": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "periodo": {
+                                                        "type": "integer",
+                                                        "example": 202102,
+                                                        "description": "Periodo de la n\u00f3mina."
+                                                    },
+                                                    "numero_empleados": {
+                                                        "type": "integer",
+                                                        "example": 20,
+                                                        "description": "N\u00famero de empleados en ese periodo."
+                                                    },
+                                                    "nomina_reportada": {
+                                                        "type": "boolean",
+                                                        "example": true,
+                                                        "description": "Indicador si la n\u00f3mina fue reportada."
+                                                    },
+                                                    "nomina": {
+                                                        "type": "number",
+                                                        "example": 30934480,
+                                                        "description": "Valor total de la n\u00f3mina."
+                                                    },
+                                                    "salario_promedio": {
+                                                        "type": "number",
+                                                        "example": 1546724,
+                                                        "description": "Salario promedio de los empleados en ese periodo."
+                                                    },
+                                                    "ventas": {
+                                                        "type": "number",
+                                                        "example": 12345567,
+                                                        "description": "Ventas reportadas por la empresa en ese periodo."
+                                                    },
+                                                    "impuestos": {
+                                                        "type": "number",
+                                                        "example": 12345,
+                                                        "description": "Impuestos reportados por la empresa en ese periodo."
+                                                    }
+                                                }
+                                            },
+                                            "example": [
+                                                {
+                                                    "periodo": 202102,
+                                                    "numero_empleados": 20,
+                                                    "nomina_reportada": true,
+                                                    "nomina": 30934480,
+                                                    "salario_promedio": 1546724,
+                                                    "ventas": 12345567,
+                                                    "impuestos": 12345
+                                                },
+                                                {
+                                                    "periodo": 202101,
+                                                    "numero_empleados": 18,
+                                                    "nomina_reportada": true,
+                                                    "nomina": 27596716,
+                                                    "salario_promedio": 1533150,
+                                                    "ventas": 12345567,
+                                                    "impuestos": 12345
+                                                },
+                                                {
+                                                    "periodo": 202012,
+                                                    "numero_empleados": 19,
+                                                    "nomina_reportada": true,
+                                                    "nomina": 27763576,
+                                                    "salario_promedio": 1461240,
+                                                    "ventas": 12345567,
+                                                    "impuestos": 12345
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "Unauthorized": {
+                "description": "El cliente actual no tiene relaci\u00f3n con el c\u00f3digo de usuario.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 401
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "unauthorized"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Cliente actual no tiene relaci\u00f3n con el c\u00f3digo de usuario."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe confirmar que el usuario haya realizado registro exitoso en el widget, ya que su informaci\u00f3n no se encuentra asociada al cliente."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Forbidden": {
+                "description": "El token ha caducado.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 403
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "forbidden"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "El token caduc\u00f3."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe solicitar un nuevo token por medio del servicio de autorizaci\u00f3n y volver a realizar la petici\u00f3n."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "NotFound": {
+                "description": "El producto no tiene informaci\u00f3n con el usuario a consultar.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 404
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "not found"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "El producto no tiene informaci\u00f3n con el usuario a consultar. El id producto o id usuario puede estar equivocado. La URL de la API no es correcta."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se debe confirmar que el usuario haya realizado registro exitoso en el widget, tambi\u00e9n validar id o documento del usuario, el id del producto a consultar o que la URL de la API se encuentra con la estructura correcta."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "InternalServerError": {
+                "description": "Error interno en la comunicaci\u00f3n con un tercero.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 500
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Internal Server Error"
+                                },
+                                "details": {
+                                    "type": "string",
+                                    "example": "Error en comunicaci\u00f3n de Yoint con un tercero."
+                                },
+                                "procedure": {
+                                    "type": "string",
+                                    "example": "Se deben comunicar inmediatamente con el equipo de soporte de Yoint."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
